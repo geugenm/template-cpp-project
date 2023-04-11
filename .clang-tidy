@@ -6,6 +6,28 @@ Checks: '-*,\
         performance-*,\
         readability-*'
 
-HeaderFilterRegex: '.*'
+HeaderFilter: ''
+
 AnalyzeTemporaryDtors: true
-FormatStyle: 'file'
+
+FormatStyle: google
+
+AllowShortLoopsOnASingleLine: false
+IndentWidth: 4
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+ObjCPropertyIndentation: None
+PenaltyBreakBeforeFirstCallParameter: 19
+SpacesBeforeTrailingComments: 1
+UseTab: Never
+
+WarningsAsErrors: '*'
+
+# Exclude specific files from linting
+ExcludePatterns:
+  - 'external/**/*'
+  - 'build/**/*'
+  - 'generated/**/*'
+  - 'third-party/**/*'
+  - 'vendor/**/*'
+  - 'tools/**/*'
