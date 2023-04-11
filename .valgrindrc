@@ -1,0 +1,37 @@
+# Increase the heap size to 1GB
+--main-stacksize=1073741824
+--massif-heap=1073741824
+
+# Turn on all error checks
+--error-exitcode=1
+--track-origins=yes
+--undef-value-errors=yes
+--leak-check=full
+--show-leak-kinds=all
+--errors-for-leak-kinds=all
+--show-reachable=yes
+
+# Exclude certain files or functions from checking
+--exclude=/usr/include/*
+--exclude=lib/*
+--exclude=vendor/*
+--exclude-fn=memcpy
+--exclude-fn=memset
+
+# Set options for specific tools
+# Memcheck tool
+--tool=memcheck
+--memcheck-errormsg-prefix="ERROR"
+--memcheck-track-origins=yes
+
+# Callgrind tool
+--tool=callgrind
+--callgrind-out-file=callgrind.out.%p
+
+# Massif tool
+--tool=massif
+--massif-out-file=massif.out.%p
+
+# Cachegrind tool
+--tool=cachegrind
+--cachegrind-out-file=cachegrind.out.%p

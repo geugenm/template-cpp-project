@@ -1,0 +1,18 @@
+# Ignore build artifacts
+build/
+dist/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# Ignore dependencies
+vendor/
+
+# Ignore editor and OS-specific files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db

@@ -1,0 +1,3 @@
+[submodule "modules/cmake-package-manager"]
+	path = modules/cmake-package-manager
+	url = https://github.com/cpm-cmake/CPM.cmake.git

@@ -1,0 +1,30 @@
+# editorconfig for C++, C, and CMake projects
+root = true
+
+# all C++ and C files
+[*.{h,hpp,c,cpp,inl,cxx,hxx}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+tab_width = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 80
+
+# CMake files
+[*.{cmake, CMakeLists.txt}]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# CMake cache files
+[CMakeCache.txt]
+charset = utf-8
+indent_style = space
+indent_size = 2
+tab_width = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = off

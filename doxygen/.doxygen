@@ -1,0 +1,30 @@
+# Doxyfile for My C++ Project
+
+# Set the project name and version
+PROJECT_NAME           = SDL Overview
+PROJECT_NUMBER         = 1.0
+
+# Set the input and output directories
+INPUT                  = src cmake test README.md
+OUTPUT_DIRECTORY       = build/docs
+
+# Specify which files should be included in the documentation
+FILE_PATTERNS          = *.cpp *.h *.cxx *.hxx *.c *.hpp *.cmake
+
+# Enable some useful output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = YES
+
+# Specify some useful settings for HTML output
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+
+# Specify some useful settings for RTF output
+GENERATE_RTF           = NO
+
+# Enable some useful features
+USE_MDFILE_AS_MAINPAGE = README.md
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
