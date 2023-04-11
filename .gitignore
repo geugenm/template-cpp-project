@@ -1,4 +1,3 @@
-### C++ template
 # Prerequisites
 *.d
 
@@ -31,45 +30,19 @@
 *.exe
 *.out
 *.app
+*.i*86
+*.x86_64
+*.hex
 
-### C template
-# Prerequisites
-*.d
-
-# Object files
-*.o
+# Object files and linker output for C
 *.ko
-*.obj
 *.elf
-
-# Linker output
 *.ilk
 *.map
 *.exp
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
 # Shared objects (inc. Windows DLLs)
-*.dll
-*.so
 *.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
 
 # Debug files
 *.dSYM/
@@ -87,37 +60,34 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-### CMake template
+# CMake files
 CMakeLists.txt.user
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
+CMakeFiles/
+CMakeScripts/
+Testing/
 Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-_deps
+_deps/
 
 # IntelliJ project files
-.idea
+.idea/
 *.iml
-out
-gen
+out/
+gen/
 
 # JetBrains IDE build directories
-.idea/
 .idea_modules/
-*.iml
 *.ipr
 *.iws
-out/
 build/
 cmake-build-*/
 
-# CLion
+# CLion files
 .cmake/
-compile_commands.json
 
+# Downloaded packages
 cache/
