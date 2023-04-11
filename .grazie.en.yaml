@@ -16,20 +16,13 @@ tokens:
   - alloc
   - buffer
   - initialize
-  - intialize
   - length
-  - leght
   - method
-  - recieve
-  - recive
+  - receive
   - release
-  - releas
   - succeed
-  - succed
   - switch
-  - witch
   - with
-  - wth
   - static_cast
 
 # Ignored words and phrases
