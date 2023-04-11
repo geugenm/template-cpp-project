@@ -1,7 +1,17 @@
+# Custom Grazie configuration
+
 extends: existence
+
+# Set warning message for possible spelling mistakes
 message: "Possible spelling mistake: '%s'"
+
+# Set warning level to 'warning'
 level: warning
+
+# Set scope of files to check for spelling mistakes
 scope: .cpp, .cc, .cxx, .hpp, .hxx
+
+# Specify words to be checked for spelling mistakes
 tokens:
   - alloc
   - buffer
@@ -20,439 +30,69 @@ tokens:
   - witch
   - with
   - wth
-  - static_cast  # avoid using C-style casts
+  - static_cast
+
+# Ignored words and phrases
+ignore:
+  - "lorem ipsum"
+  - "ipso facto"
+
+
+# Grammar and style rules
 rules:
-  - id: avoid-c-style-casts
-    message: "Avoid using C-style casts, use static_cast instead."
-    level: error
-    pattern: "\(.*\)\s*[^)]+"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "(int) some_variable"
-      - "(float*) some_pointer"
-    actions:
-      - replace: "\((.*)\)\s*([^)]+)"
-        with: "static_cast<$1>($2)"
-  - id: unused-variables
-    message: "Unused variable: '%s'"
-    level: warning
-    pattern: "((int|float|double|char)\s+[\w]+\s*(,|;))"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "int a;"
-      - "float b, c;"
-    actions:
-      - ignore: "int main"
-      - ignore: "int argc"
-      - ignore: "char* argv"
-  - id: unused-functions
-    message: "Unused function: '%s'"
-    level: warning
-    pattern: "(int|float|double|void)\s+[\w]+\s*\("
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "void do_something(int a, float b)"
-      - "int add(int a, int b)"
-    actions:
-      - ignore: "int main"
-  - id: naming-conventions
-    message: "Naming convention violation: '%s'"
-    level: warning
-    pattern: "([a-z][a-z0-9]*(_[a-z0-9]+)*)(\s+[a-zA-Z])|([A-Z][a-z0-9]*)"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "int my_variable;"
-      - "void myFunction(int arg1, float arg2)"
-      - "class MyClass {}"
-    actions:
-      - ignore: "^[A-Z_]+$"  # Ignore constants
-      - replace: "(_[a-z])"
-        with: "$1"
-  - id: memory-leaks
-    message: "Potential memory leak detected."
-    level: warning
-    pattern: "new "
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "int* ptr = new int;"
-      - "float* arr = new float[10];"
-  - id: code-formatting
-    message: "Code formatting violation: '%s'"
-    level: warning
-    pattern: "(^|\n)[^\n]*?(?:\{|\})[^\n]*?(?=\n)"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "if (condition) { do_something(); } else { do_something_else(); }"
-      - "for (int i = 0; i < n; i++) { do_something(i); }"
-      - "class MyClass { public: void my_function() { do_something(); } };"
-  - id: unused-variable
-    message: "Unused variable: '%s'"
-    level: warning
-    pattern: "\\b(?:auto|bool|char|class|const|double|enum|explicit|extern|float|inline|int|long|namespace|register|short|signed|sizeof|static|struct|template|typedef|typename|union|unsigned|void|volatile)\\b[^{;\\n]*\\s+(\\w+)\\s*(?:=[^;\\n]*)?;\\s*(?://.*)?$"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "int x = 42;  // x is unused"
-      - "const double pi = 3.14159;  // pi is unused"
-      - "void my_function(int arg1) {  // arg1 is unused\n  int unused_var = 0;\n}"
-  - id: function-naming
-    extends: naming
-    message: "Function name '%s' does not conform to naming conventions"
-    level: warning
-    scope: .cpp, .cc, .cxx, .hpp
-    format: snake_case
-    prefixes:
-      - get_
-      - set_
-      - is_
-    allowed_words:
-      - initialize
-  - id: magic-number
-    message: "Possible magic number: '%s'"
-    level: warning
-    pattern: "(?<!\\w)(?:0x[\\da-f]+|\\d+(?:\\.\\d+)?)(?!\\w)"
-    scope: .cpp, .cc, .cxx, .hpp
+  Cpp:
+    - enable: true
+      style: google
 
-  - id: include-what-you-use
-    message: "Include what you use: add missing '#include' for '%s'"
-    level: warning
-    pattern: "#include <(\\w+(?:/\\w+)*)\\.h>"
-    scope: .cpp, .cc, .cxx, .hpp
-    examples:
-      - "#include <iostream>  // iostream is used\nint main() { std::cout << \"Hello, world!\" << std::endl; }"
-      - "int foo() {\n  std::vector<int> v;  // vector is used, but #include <vector> is missing\n}"
-  - id: unused-variable
-    message: "'%s' is unused"
-    level: warning
-    pattern: "(?:\\b[a-zA-Z_]\\w*\\b\\s*)+(?:\\s*=\\s*(?:\\b[a-zA-Z_]\\w*\\b\\s*)*)?;(?:\\s*//.*)?$"
-    scope: .cpp, .cc, .cxx, .hpp
+# Enabled checks
+checks:
+  grammar:
+    uselessWords: true
+    unnecessaryPassiveVoice: true
+    wordiness: true
+    redundancy: true
 
-  - id: missing-braces
-    message: "Possible missing braces around statement"
-    level: warning
-    pattern: "(?:^|\\}|\\b(?:if|else|for|while)\\b)\\s*(?:if|else)\\b(?:(?!\\{).)*$"
-    scope: .cpp, .cc, .cxx, .hpp
+  spelling:
+    typos: true
+    mixedCase: true
+    camelCase: true
+    abbreviations: true
+    numbers: true
+    urls: true
+    emails: true
 
-  - id: too-many-arguments
-    message: "Too many arguments for function '%s'"
-    level: warning
-    pattern: "\\b\\w+\\(.*?,.*?,.*?,.*?,.*?\\)"
-    scope: .cpp, .cc, .cxx, .hpp
+  naming:
+    functionNames:
+      style: google
+      except:
+        - 'SetUp'
+        - 'TearDown'
 
-  - id: mixed-tab-whitespace
-    message: "Mixed tab and space indentation"
-    level: warning
-    pattern: "^\\t+(?:(?: +\\t)|(?:\\t +))|^ +\\t"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: uninitialized-variable
-    message: "Variable '%s' is uninitialized"
-    level: error
-    pattern: "\\b[a-zA-Z_]\\w*\\b\\s*(?<!\\bconst\\s)\\b[a-zA-Z_]\\w*\\b(?<!\\s=\\s.+)(?<!\\()\\s*;"
-    scope: .cpp, .cc, .cxx, .hpp
+    variableNames:
+      style: google
+      except:
+        - 'tmp'
+        - 'i'
+        - 'j'
+        - 'k'
 
-  - id: line-length
-    message: "Line too long (%s > %s characters)"
-    level: warning
-    pattern: "^.{121,}$"
-    parameters:
-      - 121
-      - 120
-    scope: .cpp, .cc, .cxx, .hpp
+    classNames:
+      style: google
 
-  - id: trailing-whitespace
-    message: "Trailing whitespace"
-    level: warning
-    pattern: "\\s+$"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: unused-parameter
-    message: "Unused parameter: '%s'"
-    level: warning
-    pattern: "\\bvoid\\s+[a-zA-Z_]\\w*\\s*\\(.*\\b([a-zA-Z_]\\w*)\\b[^,]*\\b\\1\\b[^,]*\\);|\\b[a-zA-Z_]\\w*\\b\\s+[a-zA-Z_]\\w*\\s*\\(.*\\)\\s*{[^}]*\\b[a-zA-Z_]\\w*\\b[^,]*\\(\\s*\\);"
-    scope: .cpp, .cc, .cxx, .hpp
+    enumNames:
+      style: google
 
-  - id: multiple-inheritance
-    message: "Multiple inheritance detected"
-    level: warning
-    pattern: "(?<!virtual\\s)(?<!,)\\bclass\\s+\\w+\\s+.*\\s*:\\s+.*\\w+.*\\s*{"
-    scope: .cpp, .cc, .cxx, .hpp
+    namespaceNames:
+      style: google
 
-  - id: no-semicolon-end-of-namespace
-    message: "Expected '}' at end of namespace; missing ';'?"
-    level: error
-    pattern: "^}\\s*(?!;).*?$"
-    scope: .cpp, .cc, .cxx, .hpp
+    structNames:
+      style: google
 
-  - id: use-auto
-    message: "Use 'auto' instead of explicitly specifying type '%s'"
-    level: suggestion
-    pattern: "\\b(?:std::)?vector(?:<[^<>]+>)?\\s+[a-zA-Z_]\\w*\\b\\s*=\\s*\\{[^}]*\\};|\\b(?:std::)?array(?:<[^<>]+>)?\\s+[a-zA-Z_]\\w*\\b\\s*=\\s*\\{[^}]*\\};|\\b(?:std::)?map(?:<[^<>]+>[^<>]+)\\s+[a-zA-Z_]\\w*\\b\\s*=\\s*\\{[^}]*\\};|\\b(?:std::)?unique_ptr(?:<[^<>]+>)?\\s+[a-zA-Z_]\\w*\\b\\s*\\("
-    scope: .cpp, .cc, .cxx, .hpp
+    memberVariableNames:
+      style: google
+      except:
+        - 'tmp'
+        - 'm_.*'
 
-  - id: unnecessary-semicolon
-    message: "Unnecessary semicolon"
-    level: warning
-    pattern: ";\\s*}"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: use-override
-    message: "Use 'override' keyword when overriding virtual functions"
-    level: suggestion
-    pattern: "(?<!override\\s)(?<!final\\s)\\b[a-zA-Z_]\\w*\\b\\s*\\(.*\\)\\s*override(?![^;{]*\\})"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: virtual-in-non-virtual-class
-    message: "Virtual function in non-virtual class"
-    level: warning
-    pattern: "\\bvirtual\\s+.*\\s*\\(.*\\)\\s*\\{"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: zero-length-array
-    message: "Zero-length array"
-    level: error
-    pattern: "\\[[^\\]]*\\s*0\\s*\\]"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: use-nullptr
-    message: "Use 'nullptr' instead of 'NULL'"
-    level: suggestion
-    pattern: "\\bNULL\\b"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: prefer-const-references
-    message: "Prefer const references instead of pass-by-value for parameters"
-    level: suggestion
-    pattern: "\\b[A-Za-z_]+\\b\\s+&\\s+[A-Za-z_]+"
-    scope: .cpp, .cc, .cxx, .hpp
-    args:
-      - "max-by-value": 3
-
-  - id: forbid-bitwise-in-bool-context
-    message: "Bitwise operators are not recommended in boolean context"
-    level: warning
-    pattern: "\\b(bool|std::vector<bool>|std::bitset)\\s*[|&^]\\s*(bool|std::vector<bool>|std::bitset)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: disallow-pointer-arithmetic
-    message: "Pointer arithmetic is disallowed"
-    level: error
-    pattern: "\\b\\w+\\s*\\*\\s*\\w+\\s*[+-]\\s*\\w+"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: prefer-nullptr-over-0
-    message: "Prefer 'nullptr' over '0' or 'NULL'"
-    level: suggestion
-    pattern: "\\b0\\b|\\bNULL\\b"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: forbid-dynamic-cast
-    message: "Dynamic casts are disallowed"
-    level: error
-    pattern: "\\bdynamic_cast\\b"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: prefer-const-over-macro
-    message: "Prefer const variables over macros"
-    level: suggestion
-    pattern: "#define\\s+([A-Z_]+)\\s+(.*)$"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: prefer-unique-ptr-over-auto-ptr
-    message: "Prefer unique_ptr over auto_ptr"
-    level: suggestion
-    pattern: "\\bstd::auto_ptr\\b"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: prefer-override
-    message: "Prefer using override keyword when overriding a virtual function"
-    level: suggestion
-    pattern: "(\\w+)\\s+(\\w+)\\s*\\(.*\\)\\s*(const)?\\s*=\\s*0"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: prefer-range-based-loop
-    message: "Prefer range-based loop over traditional for-loop"
-    level: suggestion
-    pattern: "\\bfor\\s*\\(\\s*(auto|const auto)?\\s*&?\\s*(\\w+)\\s*:\\s*(\\w+)\\s*\\)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: avoid-std-cout
-    message: "Avoid using std::cout for output, use a logger instead"
-    level: suggestion
-    pattern: "\\bstd::cout\\b"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: possible-buffer-overflow
-    message: "Possible buffer overflow detected"
-    level: warning
-    pattern: "(strcpy|strcat|sprintf|vsprintf|gets)\\s*\\("
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: uninitialized-memory
-    message: "Uninitialized memory usage detected"
-    level: warning
-    pattern: "\\b(new|malloc|calloc)\\s*\\(.*\\)\\s*;.*\\1\\s*\\(.+\\)\\s*;?"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: uninitialized-variable
-    message: "Uninitialized variable usage detected"
-    level: warning
-    pattern: "(if|while|for)\\s*\\(\\s*(!)?(\\w+)?\\s*\\)\\s*\\{.*\\b\\3\\s*=\\s*\\w*;?"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: potential-null-dereference
-    message: "Potential null pointer dereference detected"
-    level: warning
-    pattern: "(if|while|for)\\s*\\(.*\\)\\s*\\{.*\\b(\\w+)\\s*->\\s*\\w+\\s*;.*\\}"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: potential-resource-leak
-    message: "Potential resource leak detected"
-    level: warning
-    pattern: "\\b(new|malloc|calloc)\\s*\\(.*\\)\\s*;?"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: unused-variable
-    message: "Unused variable detected"
-    level: warning
-    pattern: "\\b(\\w+)\\b\\s*;\\s*$"
-    ignore_pattern: "(^\\s*//|//\\s*$)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: unused-parameter
-    message: "Unused function parameter detected"
-    level: warning
-    pattern: "\\(\\s*(?:\\bconst\\b\\s+)?\\w+\\s+\\w+\\s*\\)\\s*\\{"
-    ignore_pattern: "(^\\s*//|//\\s*$)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: unused-function
-    message: "Unused function detected"
-    level: warning
-    pattern: "\\b(?:inline\\s+)?\\w+\\s+\\w+\\s*\\(.*\\)\\s*\\{"
-    ignore_pattern: "(^\\s*//|//\\s*$)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: cast-align
-    message: "Potential alignment issues detected due to cast"
-    level: warning
-    pattern: "(\\b(?:dynamic|static|reinterpret)_cast\\b.*)"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: use-after-free
-    message: "Potential use-after-free vulnerability detected"
-    level: warning
-    pattern: "\\bdelete\\s+(\\w+)\\s*;"
-    scope: .cpp, .cc, .cxx, .hpp
-  - id: missing-braces
-    message: "Missing braces detected"
-    level: warning
-    pattern: "(if|else|for|while)\\s*\\(.*\\)\\s*(?!\\{)\\w*\\s*;"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: integer-overflow
-    message: "Potential integer overflow detected"
-    level: warning
-    pattern: "\\b(\\w+)\\s*[\\+\\-\\*/\\%]=?\\s*[+-]?\\d+[uUlL]*"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - id: division-by-zero
-    message: "Potential division by zero detected"
-    level: warning
-    pattern: "\\b(\\w+)\\s*[\\+\\-\\*/\\%]=?\\s*0"
-    scope: .cpp, .cc, .cxx, .hpp
-
-  - name: detect-and-fix-null-pointer-dereference
-    description: "Detect and fix null pointer dereference"
-    tool:
-      name: clang-tidy
-      args: [ "-checks=-*,bugprone-null-dereference", "-fix" ]
-    file-extension: .cpp, .cc, .cxx, .h, .hpp
-    level: error
-
-  - name: detect-and-fix-buffer-overflows
-    description: "Detect and fix buffer overflows"
-    tool:
-      name: clang-tidy
-      args: [ "-checks=-*,cppcoreguidelines-pro-bounds-array-to-pointer-decay", "-fix" ]
-    file-extension: .cpp, .cc, .cxx, .h, .hpp
-    level: error
-
-  # Add std namespace completion
-  - triggerCharacters: [ ":", "<" ]
-    content: |
-      {
-          "triggerCharacters": [":", "<"],
-          "command": "editor.action.triggerSuggest",
-          "context": [
-              {
-                  "languageId": "cpp",
-                  "triggerCharacter": ":"
-              },
-              {
-                  "languageId": "cpp",
-                  "triggerCharacter": "<"
-              }
-          ]
-      }
-
-  # Add function argument completion
-  - language: cpp
-    completionProvider:
-      triggerCharacters: [ "(", "," ]
-      resolveProvider: true
-
-  # Add enum value completion
-  - language: cpp
-    completionProvider:
-      triggerCharacters: [ "." ]
-      resolveProvider: true
-
-  # Add method call completion
-  - language: cpp
-    completionProvider:
-      triggerCharacters: [ "." ]
-      resolveProvider: true
-
-  # Add code snippets completion
-  - language: cpp
-    completionProvider:
-      triggerCharacters: [ " " ]
-      resolveProvider: true
-
-  # Automatic header inclusion
-  - language: cpp
-    completionProvider:
-      includeDirective: true
-
-  # Context-aware autocompletion
-  - language: cpp
-    completionProvider:
-      contextSnippetSortOrder: bottom-up
-
-  # Template argument autocompletion
-  - language: cpp
-    completionProvider:
-      resolveProvider: true
-      triggerCharacters: [ "<", "," ]
-
-  # Automatic type inference
-  - language: cpp
-    completionProvider:
-      resolveProvider: true
-      triggerCharacters: [ "=", " " ]
-
-  # Automatic code generation
-  - language: cpp
-    completionProvider:
-      insertPragmaOnce: true
-    codeActionsProvider:
-      generateGetterSetter: true
-
-  # Automatic header guards
-  - language: cpp
-    formattingProvider:
-      autoHeaderGuard: true
-
-  # Automatic function signature suggestion
-  - language: cpp
-    completionProvider:
-      signatureHelp: true
-
-  # Automatic code formatting
-  - language: cpp
-    formattingProvider:
-      clangFormat: true
+    constantNames:
+      style: google
