@@ -16,9 +16,6 @@ RUN pacman -Syu --noconfirm && \
 # Copy the source code into the container
 COPY . /app
 
-# Set the compiler flags
-ENV CXXFLAGS="-std=c++23 -Wall -Wextra -pedantic -Werror"
-
 # Build the project using CMakePresets.json
 RUN cmake --preset=Release
 RUN cmake --build build/release --config Release

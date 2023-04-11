@@ -1,6 +1,4 @@
-include(modules/cmake-package-manager/cmake/CPM.cmake)
-
-set(CPM_PACKAGES ${CMAKE_CURRENT_LIST_DIR}/packages)
+include(${CMAKE_CURRENT_LIST_DIR}/../modules/cmake-package-manager/cmake/CPM.cmake)
 
 set(CPM_SOURCE_CACHE ${CMAKE_CURRENT_LIST_DIR}/../cache)
 
