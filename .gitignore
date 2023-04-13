@@ -89,5 +89,5 @@ cmake-build-*/
 # CLion files
 .cmake/
 
-# Downloaded packages
+# Downloaded modules
 cache/

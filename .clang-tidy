@@ -31,3 +31,4 @@ ExcludePatterns:
   - 'third-party/**/*'
   - 'vendor/**/*'
   - 'tools/**/*'
+  - 'modules/**/*'

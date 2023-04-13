@@ -1,4 +1,4 @@
-# editorconfig for C++, C, and CMake projects
+ # editorconfig for C++, C, and CMake projects
 root = true
 
 # all C++ and C files
