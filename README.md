@@ -34,7 +34,7 @@ All you need is to install doxygen and run these commands:
 ```bash
 doxygen docs/.doxygen
 cd scripts
-sh view_docs.sh
+sh build_docs.sh
 ```
 It'll open your default app for viewing html files
 

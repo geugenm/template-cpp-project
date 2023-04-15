@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ..
-
 # Include the .env file
 if [[ -f .env ]]; then
     source .env
