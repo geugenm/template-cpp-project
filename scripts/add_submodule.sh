@@ -27,7 +27,7 @@ else
   git submodule update --init "$SCRIPT_DIR/../modules/$repo_name"
 fi
 
-# Create a CMakeLists.txt file in the "../modules/config/" folder with the package name
+# Create a CMakeLists.txt file in the "../modules/cfg/" folder with the package name
 if [ ! -d "$SCRIPT_DIR/../modules/config" ]; then
   mkdir "$SCRIPT_DIR/../modules/config"
 fi
