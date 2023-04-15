@@ -28,10 +28,11 @@ else
 fi
 
 # Create a CMakeLists.txt file in the "../modules/cfg/" folder with the package name
-if [ ! -d "$SCRIPT_DIR/../modules/config" ]; then
-  mkdir "$SCRIPT_DIR/../modules/config"
+if [ ! -d "$SCRIPT_DIR/../modules/cfg" ]; then
+  mkdir "$SCRIPT_DIR/../modules/cfg"
 fi
-if [ ! -f "$SCRIPT_DIR/../modules/config/$repo_name.cmake" ]; then
-  echo "project($repo_name)" > "$SCRIPT_DIR/../modules/config/$repo_name.cmake"
-  echo "add_subdirectory(../$repo_name)" >> "$SCRIPT_DIR/../modules/config/$repo_name.cmake"
+if [ ! -f "$SCRIPT_DIR/../modules/cfg/$repo_name/$repo_name.cmake" ]; then
+  mkdir -p "$SCRIPT_DIR/../modules/cfg/$repo_name"
+  echo "project($repo_name)" > "$SCRIPT_DIR/../modules/cfg/$repo_name/$repo_name.cmake"
+  echo "add_subdirectory(../$repo_name)" >> "$SCRIPT_DIR/../modules/cfg/$repo_name/$repo_name.cmake"
 fi
