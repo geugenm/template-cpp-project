@@ -1,1 +1,0 @@
-set(CPM_PACKAGES_CONFIG ${CMAKE_CURRENT_LIST_DIR}/../modules/cfg)
