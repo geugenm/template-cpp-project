@@ -12,8 +12,12 @@ include(cmake/configure_compiler.cmake)
 include(cmake/code_quality.cmake)
 
 include(cmake/check_platform.cmake)
-include(cmake/packages.cmake)
 
 add_subdirectory(src)
 
-add_subdirectory(test)
+option(BUILD_TESTS "Build tests" ON)
+
+if (BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(test)
+endif ()
