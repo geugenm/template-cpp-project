@@ -14,7 +14,8 @@
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
+        "CMAKE_CXX_STANDARD": "23",
+        "CMAKE_CXX_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -fmodules-ts",
         "CMAKE_C_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CXX_FLAGS_DEBUG": "-fsanitize=address,undefined",
@@ -29,6 +30,7 @@
       "binaryDir": "${sourceDir}/build/valgrind",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_STANDARD": "23",
         "CMAKE_CXX_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_C_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
@@ -48,6 +50,7 @@
       "binaryDir": "${sourceDir}/build/test",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_STANDARD": "23",
         "CMAKE_CXX_FLAGS": "-Ofast -DNDEBUG -march=native -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_C_FLAGS": "-Ofast -DNDEBUG -march=native -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
@@ -64,6 +67,7 @@
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_STANDARD": "23",
         "CMAKE_CXX_FLAGS": "-Ofast -DNDEBUG -march=native",
         "CMAKE_C_FLAGS": "-Ofast -DNDEBUG -march=native"
       }
