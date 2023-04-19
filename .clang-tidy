@@ -4,13 +4,16 @@ Checks: '-*,\
         cppcoreguidelines-*,\
         modernize-*,\
         performance-*,\
-        readability-*'
+        readability-*,\
+        google-readability-braces-around-statements,\
+        google-readability-todo',\
+        readability-identifier-naming'
 
 HeaderFilter: ''
 
 AnalyzeTemporaryDtors: true
 
-FormatStyle: google
+FormatStyle: webkit
 
 AllowShortLoopsOnASingleLine: false
 IndentWidth: 4
