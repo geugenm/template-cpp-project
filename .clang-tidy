@@ -1,19 +1,24 @@
-Checks: '-*,\
-        bugprone-*,\
-        clang-analyzer-*,\
-        cppcoreguidelines-*,\
-        modernize-*,\
-        performance-*,\
-        readability-*,\
-        google-readability-braces-around-statements,\
-        google-readability-todo',\
-        readability-identifier-naming'
+Checks: >-
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  microsoft-readability-*,
+  microsoft-modernize-*,
+  microsoft-performance-*,
+  microsoft-cppcoreguidelines-*,
+  microsoft-bugprone-*,
+  google-readability-braces-around-statements,
+  google-readability-todo,
+  readability-identifier-naming
 
 HeaderFilter: ''
+HeaderFilterRegex: '^(?!.*(gtest|gmock)).*$'
 
 AnalyzeTemporaryDtors: true
-
-FormatStyle: webkit
 
 AllowShortLoopsOnASingleLine: false
 IndentWidth: 4
@@ -35,3 +40,4 @@ ExcludePatterns:
   - 'vendor/**/*'
   - 'tools/**/*'
   - 'modules/**/*'
+  - 'cache/**/*'
