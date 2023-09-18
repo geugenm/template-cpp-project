@@ -1,24 +1,5 @@
 #!/bin/bash
 
-## @file generate_docs.sh
-#  @brief Script for generating Doxygen documentation
-#
-#  This script generates documentation for a project using Doxygen.
-#  It uses variables from a .env file, and provides an interactive prompt
-#  to confirm whether the user wants to generate the documentation or not.
-#
-#  @author geugenm
-#  @date 2023-05-13
-#
-#  @section usage Usage
-#
-#  To use the script, simply run it from the command line:
-#
-#  @code{.sh}
-#  ./generate_docs.sh
-#  @endcode
-#
-
 # Variables from .env file
 INDEX_FILE="index.html"
 LATEX_MAKE_FILE="Makefile"
@@ -49,3 +30,4 @@ while true; do
     * ) echo "Please answer Y (Yes) or n (No).";;
   esac
 done
+

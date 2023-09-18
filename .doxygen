@@ -1,15 +1,15 @@
-# Doxyfile for firmware project
+# Doxyfile for My C++ Project
 
 # Set the project name and version
-PROJECT_NAME           = CanSAT firmware
+PROJECT_NAME           = SDL Overview
 PROJECT_NUMBER         = 1.0
 
 # Set the input and output directories
-INPUT                  = . src cmake test scripts README.md
+INPUT                  = src cmake test README.md
 OUTPUT_DIRECTORY       = build/docs
 
 # Specify which files should be included in the documentation
-FILE_PATTERNS          = *.cpp *.h *.cxx *.hxx *.c *.hpp *.cmake *.py *.sh
+FILE_PATTERNS          = *.cpp *.h *.cxx *.hxx *.c *.hpp *.cmake
 
 # Enable some useful output formats
 GENERATE_HTML          = YES
@@ -24,18 +24,7 @@ GENERATE_RTF           = NO
 
 # Enable some useful features
 USE_MDFILE_AS_MAINPAGE = README.md
-QUIET                  = NO
+QUIET                  = YES
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
-
-# Map file extensions to the proper parser
-EXTENSION_MAPPING      = sh=C py=Python
-
-# Set EXTRACT_ALL to YES
-EXTRACT_ALL            = YES
-
-# Set RECURSIVE to YES
-RECURSIVE              = YES
-
-EXCLUDE = lib

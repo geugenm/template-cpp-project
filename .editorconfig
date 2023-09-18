@@ -4,7 +4,7 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = false
-max_line_length = 120
+max_line_length = 80
 tab_width = 4
 ij_continuation_indent_size = 8
 ij_formatter_off_tag = @formatter:off
@@ -14,28 +14,8 @@ ij_smart_tabs = false
 ij_visual_guides = none
 ij_wrap_on_typing = false
 
-[*.gsh]
-ij_glsl_space_after_colon = true
-ij_glsl_space_after_comma = true
-ij_glsl_space_after_for_semicolon = true
-ij_glsl_space_after_quest = true
-ij_glsl_space_before_colon = true
-ij_glsl_space_before_comma = false
-ij_glsl_space_before_for_semicolon = false
-ij_glsl_space_before_quest = true
-ij_glsl_spaces_around_additive_operators = true
-ij_glsl_spaces_around_assignment_operators = true
-ij_glsl_spaces_around_bitwise_operators = true
-ij_glsl_spaces_around_equality_operators = true
-ij_glsl_spaces_around_logical_operators = true
-ij_glsl_spaces_around_multiplicative_operators = true
-ij_glsl_spaces_around_relational_operators = true
-ij_glsl_spaces_around_shift_operators = true
-ij_glsl_spaces_within_brackets = false
-ij_glsl_spaces_within_parentheses = false
-
 [.editorconfig]
-ij_editorconfig_align_group_field_declarations = false
+ij_editorconfig_align_group_field_declarations = true
 ij_editorconfig_space_after_colon = false
 ij_editorconfig_space_after_comma = true
 ij_editorconfig_space_before_colon = false
@@ -84,8 +64,8 @@ ij_shell_redirect_followed_by_space = false
 ij_shell_switch_cases_indented = false
 ij_shell_use_unix_line_separator = true
 
-[{*.c,*.c++,*.c++m,*.cc,*.ccm,*.cp,*.cpp,*.cppm,*.cu,*.cuh,*.cxx,*.cxxm,*.h,*.h++,*.hh,*.hp,*.hpp,*.hxx,*.i,*.icc,*.ii,*.inl,*.ino,*.ipp,*.ixx,*.m,*.mm,*.mxx,*.pch,*.tcc,*.tpp}]
-ij_c_add_brief_tag = true
+[{*.c,*.c++,*.c++m,*.cc,*.ccm,*.cp,*.cpp,*.cppm,*.cu,*.cuh,*.cxx,*.cxxm,*.h,*.h++,*.hh,*.hp,*.hpp,*.hxx,*.i,*.icc,*.ii,*.inl,*.ino,*.ipp,*.ixx,*.m,*.mm,*.mxx,*.pch,*.pde,*.tcc,*.tpp}]
+ij_c_add_brief_tag = false
 ij_c_add_getter_prefix = true
 ij_c_add_setter_prefix = true
 ij_c_align_dictionary_pair_values = false
@@ -130,7 +110,7 @@ ij_c_copy_is_deep = false
 ij_c_create_interface_for_categories = true
 ij_c_declare_generated_methods = true
 ij_c_description_include_member_names = true
-ij_c_discharged_short_ternary_operator = true
+ij_c_discharged_short_ternary_operator = false
 ij_c_do_not_add_breaks = false
 ij_c_do_while_brace_force = never
 ij_c_else_on_new_line = false
@@ -375,8 +355,8 @@ ij_c_while_on_new_line = false
 ij_c_wrap_property_declaration = off
 
 [{*.cmake,CMakeLists.txt}]
-ij_cmake_align_multiline_parameters_in_calls = false
-ij_cmake_force_commands_case = 2
+ij_cmake_align_multiline_parameters_in_calls = true
+ij_cmake_force_commands_case = 1
 ij_cmake_keep_blank_lines_in_code = 2
 ij_cmake_space_before_for_parentheses = true
 ij_cmake_space_before_if_parentheses = true
@@ -389,12 +369,29 @@ ij_cmake_spaces_within_method_call_parentheses = false
 ij_cmake_spaces_within_method_parentheses = false
 ij_cmake_spaces_within_while_parentheses = false
 
-[{*.comp,*.frag,*.fsh,*.geom,*.glsl,*.tesc,*.tese,*.vert,*.vsh}]
-ij_glsl_keep_indents_on_empty_lines = false
+[{*.comp,*.frag,*.fsh,*.geom,*.glsl,*.gsh,*.tesc,*.tese,*.vert,*.vsh}]
+ij_glsl_space_after_colon = true
+ij_glsl_space_after_comma = true
+ij_glsl_space_after_for_semicolon = true
+ij_glsl_space_after_quest = true
+ij_glsl_space_before_colon = false
+ij_glsl_space_before_comma = false
+ij_glsl_space_before_for_semicolon = false
+ij_glsl_space_before_quest = true
+ij_glsl_spaces_around_additive_operators = true
+ij_glsl_spaces_around_assignment_operators = true
+ij_glsl_spaces_around_bitwise_operators = true
+ij_glsl_spaces_around_equality_operators = true
+ij_glsl_spaces_around_logical_operators = true
+ij_glsl_spaces_around_multiplicative_operators = true
+ij_glsl_spaces_around_relational_operators = true
+ij_glsl_spaces_around_shift_operators = true
+ij_glsl_spaces_within_brackets = false
+ij_glsl_spaces_within_parentheses = false
 
 [{*.har,*.json}]
 indent_size = 2
-ij_json_array_wrapping = split_into_lines
+ij_json_array_wrapping = off
 ij_json_keep_blank_lines_in_code = 0
 ij_json_keep_indents_on_empty_lines = false
 ij_json_keep_line_breaks = true
@@ -437,11 +434,6 @@ ij_html_space_around_equality_in_attribute = false
 ij_html_space_inside_empty_tag = false
 ij_html_text_wrap = normal
 
-[{*.http,*.rest}]
-indent_size = 0
-ij_continuation_indent_size = 4
-ij_http request_call_parameters_wrap = normal
-
 [{*.markdown,*.md}]
 ij_markdown_force_one_space_after_blockquote_symbol = true
 ij_markdown_force_one_space_after_header_symbol = true
@@ -459,6 +451,3 @@ ij_markdown_min_lines_around_header = 1
 ij_markdown_min_lines_between_paragraphs = 1
 ij_markdown_wrap_text_if_long = true
 ij_markdown_wrap_text_inside_blockquotes = true
-
-[{*.toml,Cargo.lock,Cargo.toml.orig,Gopkg.lock,Pipfile,poetry.lock}]
-ij_toml_keep_indents_on_empty_lines = false

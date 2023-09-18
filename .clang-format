@@ -32,15 +32,15 @@ BreakConstructorInitializers: BeforeColon
 BreakAfterJavaFieldAnnotations: false
 BreakStringLiterals: true
 
-ColumnLimit: 120
+ColumnLimit: 80
 
 CommentPragmas: '^ IWYU pragma:'
 CompactNamespaces: false
 
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ConstructorInitializerIndentWidth: 2
+ConstructorInitializerIndentWidth: 4
 
-ContinuationIndentWidth: 2
+ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
 
 DerivePointerAlignment: false
@@ -68,7 +68,7 @@ IncludeIsMainRegex: '(Test)?$'
 
 IndentCaseLabels: true
 IndentPPDirectives: None
-IndentWidth: 2
+IndentWidth: 4
 IndentWrappedFunctionNames: false
 
 JavaScriptQuotes: Leave
@@ -82,11 +82,11 @@ MaxEmptyLinesToKeep: 1
 
 NamespaceIndentation: None
 
-ObjCBlockIndentWidth: 2
+ObjCBlockIndentWidth: 4
 ObjCSpaceAfterProperty: false
 ObjCSpaceBeforeProtocolList: true
 
-PenaltyBreakAssignment: 2
+PenaltyBreakAssignment: 4
 PenaltyBreakBeforeFirstCallParameter: 19
 PenaltyBreakComment: 300
 PenaltyBreakFirstLessLess: 120
