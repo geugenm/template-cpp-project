@@ -5,5 +5,5 @@ if (CPPLINT)
             COMMENT "Linting code..."
             )
 else()
-    message(WARNING "cpplint not found. The lint target will not be available.")
+    message(STATUS "cpplint not found. The lint target will not be available.")
 endif ()

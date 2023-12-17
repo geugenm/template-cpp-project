@@ -5,5 +5,5 @@ if (CLANG_TIDY)
             COMMENT "Checking code with clang-tidy..."
             )
 else()
-    message(WARNING "clang-tidy not found. The tidy target will not be available.")
+    message(STATUS "clang-tidy not found. The tidy target will not be available.")
 endif ()

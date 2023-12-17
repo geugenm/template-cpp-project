@@ -5,5 +5,5 @@ if (CLANG_FORMAT)
             COMMENT "Formatting code..."
             )
 else()
-    message(WARNING "clang-format not found. The format target will not be available.")
+    message(STATUS "clang-format not found. The format target will not be available.")
 endif ()
