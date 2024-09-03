@@ -175,6 +175,7 @@ python -m http.server 8080
 ## Todo
 1. Add android build
 2. Add ios build
+3. Add SECURITY.md and CODE_OF_CONDUCT.md
 
 ## Contributing
 
