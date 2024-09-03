@@ -2,7 +2,7 @@ find_program(CLANG_TIDY "clang-tidy")
 
 if (CLANG_TIDY)
     add_custom_target(clang_tidy
-            COMMAND ${CLANG_TIDY} ${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,hpp,hxx} -- -std=c++20
+            COMMAND ${CLANG_TIDY} ${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,hpp,hxx} -- -std=c++${CMAKE_CXX_STANDARD}
             COMMENT "clang-tidy is a clang-based C++ “linter” tool. Its purpose is to provide an extensible framework for diagnosing and fixing typical programming errors, like style violations, interface misuse, or bugs that can be deduced via static analysis. clang-tidy is modular and provides a convenient interface for writing new checks."
             )
 else()

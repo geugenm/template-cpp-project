@@ -2,7 +2,7 @@ find_program(CLANG_FORMAT "clang-format")
 
 if (CLANG_FORMAT)
     add_custom_target(clang_format
-            COMMAND ${CLANG_FORMAT} -i ${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,hpp,hxx}
+            COMMAND ${CLANG_FORMAT} -i ${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,c,hpp,hxx,h}
             COMMENT "Clang-Format focuses on formatting source code to a specific style, while Clang-Tidy analyzes the code for potential issues, including bugs and performance issues."
             )
 else()
