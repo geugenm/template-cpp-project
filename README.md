@@ -135,7 +135,7 @@ cmake --preset=release .
 cd build/release
 cmake --build . --config release
 ```
-For more build configurations see [CMakePresets.json](https://github.com/geugenm/sdl-overview/blob/master/CMakePresets.json)
+For more build configurations see [CMakePresets.json](CMakePresets.json)
 
 Also, you can use cmake-gui/cmake-cli app to simplify the proccess locally.
 
@@ -184,7 +184,7 @@ different language.
 
 ## License
 
-This project is licensed under the AGPL-3.0 License — see the `LICENSE` file for details.
+This project is licensed under the AGPL-3.0 License — see the [LICENSE] file for details.
 
 ## Acknowledgments
 
