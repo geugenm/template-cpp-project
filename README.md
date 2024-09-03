@@ -3,24 +3,26 @@
 1. Clone the repository via `git clone --recurse-submodules <repository URL>`
 2. Install the required dependencies:
     - `cmake 3.25.0+`
-    - `cpp compiler with cpp 23 support`
+    - `c++ compiler with cpp 23 support`
     - `ninja`
+    - `(optional) cmake/cfg/*.cmake tools`
 
 ## Build & Deployment
 
 ### Build the project 
 
 ```bash
-cmake --preset=Release .
+cmake --preset=release .
 cd build/release
-cmake --build . --config Release
+cmake --build . --config release
 ```
 For more build configurations see [CMakePresets.json](https://github.com/geugenm/sdl-overview/blob/master/CMakePresets.json)
 
-Also,
-you can use an automized [build.sh](https://github.com/geugenm/sdl-overview/blob/master/scripts/build.sh) 
-in `scripts` folder changing directory to `..` by default.
+### Uninstall the project
 
+```bash
+sudo xargs rm < install_manifest.txt
+```
 
 ### Docker build on manjaro
 
@@ -32,11 +34,9 @@ docker build -t my-image -f docker/Dockerfile .
 
 All you need is to install doxygen and run these commands:
 ```bash
-doxygen docs/.doxygen
-cd scripts
-sh build_docs.sh
+cd build/release
+cmake --build . --target doxygen
 ```
-It'll open your default app for viewing html files
 
 ## Contributing
 

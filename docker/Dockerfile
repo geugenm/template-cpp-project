@@ -17,8 +17,8 @@ RUN pacman -Syu --noconfirm && \
 COPY . /app
 
 # Build the project using CMakePresets.json
-RUN cmake --preset=Release
-RUN cmake --build build/release --config Release
+RUN cmake --preset=release
+RUN cmake --build build/release --config release
 
 # Set the entrypoint to an interactive shell
 CMD ["/bin/bash"]
