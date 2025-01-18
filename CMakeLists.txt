@@ -20,6 +20,9 @@ find_package(doxygen CONFIG REQUIRED)
 include(cmake/CPM.cmake)
 list(APPEND CMAKE_PREFIX_PATH cmake/pkg)
 
+# Add packages here
+find_package(doctest CONFIG REQUIRED)
+
 add_subdirectory(src)
 
 option(BUILD_TESTS "Build tests" ON)
