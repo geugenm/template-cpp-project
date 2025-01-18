@@ -9,11 +9,7 @@ project(
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(
-    APPEND
-    CMAKE_PREFIX_PATH
-    cmake/cfg
-    cmake/pkg)
+list(APPEND CMAKE_PREFIX_PATH cmake/cfg)
 
 find_package(clang_format CONFIG REQUIRED)
 find_package(clang_tidy CONFIG REQUIRED)
@@ -22,8 +18,7 @@ find_package(doxygen CONFIG REQUIRED)
 
 # Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
 include(cmake/CPM.cmake)
-
-find_package(doctest CONFIG REQUIRED)
+list(APPEND CMAKE_PREFIX_PATH cmake/pkg)
 
 add_subdirectory(src)
 

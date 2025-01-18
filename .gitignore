@@ -91,6 +91,7 @@ cmake-build-*/
 
 # Downloaded modules
 cache/
+.cache/
 
 # Preset build directories
 .build/

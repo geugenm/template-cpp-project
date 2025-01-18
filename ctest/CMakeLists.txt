@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
+find_package(doctest CONFIG REQUIRED)
+
 add_executable(env_test env_test.cxx)
 add_test(NAME env_test COMMAND $<TARGET_FILE:env_test>)
 
