@@ -1,23 +1,38 @@
 #include <cstdlib>
+#include <filesystem>
 #include <format>
 #include <iostream>
-#include <pwd.h>
 #include <string>
-#include <unistd.h>
 
 int main()
 {
-    const std::string user_name = getpwuid(getuid())->pw_name;
-    const char*       home_dir  = getpwuid(getuid())->pw_dir;
-    const char*       shell     = getpwuid(getuid())->pw_shell;
-    const char*       os        = getenv("OS");
-    const char*       user      = getenv("USER");
+    // Get the username
+    std::string user_name =
+        std::getenv("USER") ? std::getenv("USER") : "Unknown";
 
+    // Get the home directory using std::filesystem
+    std::filesystem::path home_dir =
+        std::filesystem::path(std::getenv("HOME") ? std::getenv("HOME") : "");
+
+    // Get the shell (fallback to "Unknown" if not available)
+    std::string shell = std::getenv("SHELL") ? std::getenv("SHELL") : "Unknown";
+
+    // Get the operating system name (cross-platform fallback)
+#ifdef _WIN32
+    std::string os = "Windows";
+#elif __APPLE__
+    std::string os = "macOS";
+#elif __linux__
+    std::string os = "Linux";
+#else
+    std::string os = "Unknown OS";
+#endif
+
+    // Output information using std::format
     std::cout << std::format("Username: {}\n", user_name);
-    std::cout << std::format("Home Directory: {}\n", home_dir);
+    std::cout << std::format("Home Directory: {}\n", home_dir.string());
     std::cout << std::format("Shell: {}\n", shell);
-    std::cout << std::format("OS: {}\n", os ? os : "Unknown");
-    std::cout << std::format("User: {}\n", user ? user : "Unknown");
+    std::cout << std::format("Operating System: {}\n", os);
 
-    return std::cout.good() ? EXIT_SUCCESS : EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }

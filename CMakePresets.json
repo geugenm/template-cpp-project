@@ -1,133 +1,127 @@
 {
-    "version": 6,
-    "cmakeMinimumRequired": {
-        "major": 3,
-        "minor": 25,
-        "patch": 0
+  "version": 9,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "default",
+      "description": "Base preset containing common configurations.",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "23",
+        "CMAKE_C_STANDARD": "23",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
+        "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function"
+      }
     },
-    "configurePresets": [
+    {
+      "name": "debug",
+      "displayName": "debug",
+      "description": "Debug build with assertions, debug info, and additional debugging options.",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined",
+        "CMAKE_C_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "release",
+      "description": "Release build with aggressive optimizations and without assertions.",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_FLAGS_RELEASE": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Ofast -DNDEBUG -march=native",
+        "CMAKE_C_FLAGS_RELEASE": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Ofast -DNDEBUG -march=native"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "stopOnFailure": true }
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "stopOnFailure": true }
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "generators": ["TGZ"]
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "generators": ["TGZ"]
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "debug",
+      "steps": [
         {
-            "name": "default",
-            "displayName": "default",
-            "description": "Base preset containing common configurations.",
-            "generator": "Ninja",
-            "cacheVariables": {
-                "CMAKE_CXX_STANDARD": "23",
-                "CMAKE_C_STANDARD": "23",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function"
-            }
+          "type": "configure",
+          "name": "debug"
         },
         {
-            "name": "debug",
-            "displayName": "debug",
-            "description": "Debug build with assertions, debug info, and additional debugging options.",
-            "inherits": "default",
-            "binaryDir": "${sourceDir}/build/debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_CXX_FLAGS": "${CMAKE_CXX_FLAGS} -Og -g",
-                "CMAKE_C_FLAGS": "${CMAKE_C_FLAGS} -Og -g",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_CXX_FLAGS_DEBUG": "-fsanitize=address,undefined",
-                "CMAKE_C_FLAGS_DEBUG": "-fsanitize=address,undefined"
-            }
+          "type": "build",
+          "name": "debug"
         },
         {
-            "name": "release",
-            "displayName": "release",
-            "description": "Release build with aggressive optimizations and without assertions.",
-            "inherits": "default",
-            "binaryDir": "${sourceDir}/build/release",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_CXX_FLAGS": "${CMAKE_CXX_FLAGS} -Ofast -DNDEBUG -march=native",
-                "CMAKE_C_FLAGS": "${CMAKE_C_FLAGS} -Ofast -DNDEBUG -march=native"
-            }
+          "type": "test",
+          "name": "debug"
+        },
+        {
+          "type": "package",
+          "name": "debug"
         }
-    ],
-    "buildPresets": [
+      ]
+    },
+    {
+      "name": "release",
+      "steps": [
         {
-            "name": "debug",
-            "configurePreset": "debug"
+          "type": "configure",
+          "name": "release"
         },
         {
-            "name": "release",
-            "configurePreset": "release"
-        }
-    ],
-    "testPresets": [
-        {
-            "name": "debug",
-            "configurePreset": "debug",
-            "output": {"outputOnFailure": true},
-            "execution": {"noTestsAction": "error", "stopOnFailure": true}
+          "type": "build",
+          "name": "release"
         },
         {
-            "name": "release",
-            "configurePreset": "release",
-            "output": {"outputOnFailure": true},
-            "execution": {"noTestsAction": "error", "stopOnFailure": true}
-        }
-    ],
-    "packagePresets": [
-        {
-            "name": "debug",
-            "configurePreset": "debug",
-            "generators": [
-                "TGZ"
-            ]
+          "type": "test",
+          "name": "release"
         },
         {
-            "name": "release",
-            "configurePreset": "release",
-            "generators": [
-                "TGZ"
-            ]
+          "type": "package",
+          "name": "release"
         }
-    ],
-    "workflowPresets": [
-        {
-            "name": "debug",
-            "steps": [
-                {
-                    "type": "configure",
-                    "name": "debug"
-                },
-                {
-                    "type": "build",
-                    "name": "debug"
-                },
-                {
-                    "type": "test",
-                    "name": "debug"
-                },
-                {
-                    "type": "package",
-                    "name": "debug"
-                }
-            ]
-        },
-        {
-            "name": "release",
-            "steps": [
-                {
-                    "type": "configure",
-                    "name": "release"
-                },
-                {
-                    "type": "build",
-                    "name": "release"
-                },
-                {
-                    "type": "test",
-                    "name": "release"
-                },
-                {
-                    "type": "package",
-                    "name": "release"
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }

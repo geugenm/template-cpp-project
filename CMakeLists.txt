@@ -9,20 +9,21 @@ project(
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND CMAKE_PREFIX_PATH cmake/cfg)
+list(
+    APPEND
+    CMAKE_PREFIX_PATH
+    cmake/cfg
+    cmake/pkg)
 
 find_package(clang_format CONFIG REQUIRED)
 find_package(clang_tidy CONFIG REQUIRED)
 find_package(cpplint CONFIG REQUIRED)
 find_package(doxygen CONFIG REQUIRED)
 
-option(
-    USE_CPM
-    "Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake"
-    ON)
-if(USE_CPM)
-    include(cmake/CPM.cmake)
-endif()
+# Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
+include(cmake/CPM.cmake)
+
+find_package(doctest CONFIG REQUIRED)
 
 add_subdirectory(src)
 
