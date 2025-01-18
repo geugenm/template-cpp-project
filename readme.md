@@ -1,160 +1,65 @@
-# Modern C++ Template
+# 🚀 Modern C++ Project Template
 
-## Features
+## 🌟 Features
 
-- **Latest C++23 Ready Presets**: Take advantage of the latest C++ features with our up-to-date presets.
-- **Code Quality Tools Targets**: Integrated targets for maintaining high code quality.
-- **CMake Package Manager (CPM)**: Simplifies dependency management.
-- **Flexible Doxygen Configuration**: Easily integrated Doxygen setup for documentation.
-- **Easy to Setup CTests**: Simplified testing setup with CTest.
-- **Docker Ready**: Pre-configured for seamless Docker integration.
-- **Compatibility**: Works with QtCreator, CLion, Visual Studio, and KDevelop.
-- **Cross-Platform**: Ready for Linux, Windows, and macOS.
-- **CMake-Driven**: All setup is done through CMake, eliminating the need for specific scripts, making CI/CD setup straightforward.
+- **🔬 C++23 Ready Presets**: Leverage cutting-edge C++ features
+- **🛡️ Code Quality Tools**: Integrated targets for maintaining high standards
+- **📦 CPM Package Management**: Simplified dependency handling
+- **📄 Doxygen Configuration**: Seamless documentation generation
+- **🧪 CTest Integration**: Straightforward testing setup
+- **🐳 Docker Support**: Pre-configured containerization
+- **💻 IDE Compatibility**: Works with QtCreator, CLion, Visual Studio, KDevelop
+- **🌐 Cross-Platform**: Linux, Windows, macOS support
+- **🏗️ CMake-Driven**: Streamlined CI/CD configuration
 
-## Installation
+## 🚧 Prerequisites
 
-1. Clone the repository via `git clone --recurse-submodules <repository URL>`
-2. Install the required dependencies:
-    - `cmake 3.25.0+`
-    - `c++ compiler with cpp 23 support`
-    - `ninja`
-    - `(optional) cmake/cfg/*.cmake tools`
+- `cmake 3.25.0+`
+- `C++ compiler with C++23 support`
+- `ninja`
+- `(optional) cmake/cfg/*.cmake tools`
 
-### macOS
+## 💾 Installation
 
-#### Install Homebrew (if not already installed)
-
-Open your terminal and run:
+### 🍎 macOS
 
 ```bash
+# Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Dependencies
+brew install cmake llvm doxygen
 ```
 
-#### Install CMake
+### 🪟 Windows
 
-Using Homebrew:
-
-```bash
-brew install cmake
-```
-
-#### Install C++ Compiler (LLVM)
-
-Using Homebrew:
-
-```bash
-brew install llvm
-```
-
-#### Install Doxygen
-
-Using Homebrew:
-
-```bash
-brew install doxygen
-```
-
----
-
-### Windows
-
-#### Install Chocolatey (if not already installed)
-
-Open Command Prompt as Administrator and run:
-
-```bash
+```powershell
+# Chocolatey
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+# Dependencies
+choco install cmake llvm visualstudio2019buildtools doxygen
 ```
 
-#### Install CMake
+### 🐧 Linux
 
-Using Chocolatey:
-
-```bash
-choco install cmake llvm
-```
-
-#### Install C++ Compiler (Visual Studio Build Tools)
-
-Using Chocolatey:
-
-```bash
-choco install visualstudio2019buildtools
-```
-
-#### Install Doxygen
-
-Using Chocolatey:
-
-```bash
-choco install doxygen
-```
-
----
-
-## Linux (Ubuntu/Debian)
-
-#### Update Package List
+#### Ubuntu/Debian
 
 ```bash
 sudo apt update
+sudo apt install cmake g++ doxygen
 ```
 
-#### Install CMake
-
-```bash
-sudo apt install cmake
-```
-
-#### Install C++ Compiler (GCC)
-
-```bash
-sudo apt install g++
-```
-
-#### Install Doxygen
-
-```bash
-sudo apt install doxygen
-```
-
----
-
-## Linux (Fedora)
-
-#### Update Package List
+#### Fedora
 
 ```bash
 sudo dnf check-update
+sudo dnf install cmake gcc-c++ doxygen
 ```
 
-#### Install CMake
+## 🛠️ Build & Deployment
 
-```bash
-sudo dnf install cmake
-```
-
-#### Install C++ Compiler (GCC)
-
-```bash
-sudo dnf install gcc-c++
-```
-
-#### Install Doxygen
-
-```bash
-sudo dnf install doxygen
-```
-
-#### Notes
-
-- Make sure to check the specific package manager commands for your Linux distribution if you're not using Ubuntu or Fedora.
-- For Windows, you may also consider installing the full Visual Studio IDE, which includes a C++ compiler and CMake support.
-
-## Build & Deployment
-
-### Build the project
+### Build Project
 
 ```bash
 cmake --preset=release .
@@ -162,60 +67,42 @@ cd build/release
 cmake --build . --config release
 ```
 
-For more build configurations see [CMakePresets.json](CMakePresets.json)
-
-Also, you can use cmake-gui/cmake-cli app to simplify the proccess locally.
-
-#### Run tests
+### Run Tests
 
 ```bash
 cd build/release
 ctest --output-on-failure
 ```
 
-### Uninstall the project
-
-```bash
-sudo xargs rm < install_manifest.txt
-```
-
-### Docker build on manjaro
+### Docker Build
 
 ```bash
 docker build -t my-image -f docker/Dockerfile .
 ```
 
-## Documentation
-
-All you need is to install doxygen and run these commands:
+## 📚 Documentation
 
 ```bash
 cd build/release
 cmake --build . --target doxygen
-```
 
-To browse the generated by cmake html documentation:
-
-```bash
+# Browse documentation
 cd build/release/docs/doxygen/html
 python -m http.server 8080
 ```
 
-## Todo
+## 🚧 Roadmap
 
-1. Add android build
+- [ ] Add Android build support
 
-## Contributing
+## 🤝 Contributing
 
-If you'd like to contribute to this project, feel free to fork the repository and submit a pull request with your
-changes.Contributions are always welcome, whether it's an improvement to the existing program or a new program in a
-different language.
+Contributions are welcome! Fork the repository and submit a pull request.
 
-## License
+## 📄 License
 
-This project is licensed under the AGPL-3.0 License — see the [license](license) file for details.
+[AGPL-3.0 License](license)
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-Thanks to the developers of CMake and CTest for providing the tools necessary to build and test this program. Also,
-thanks to the open-source community for providing resources and support for C++ development.
+Thanks to CMake, CTest, and the open-source community.
