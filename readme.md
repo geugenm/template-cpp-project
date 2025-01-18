@@ -2,26 +2,37 @@
 
 # 🚀 Modern C++ Project Template
 
+<!-- Project Variables -->
+
+[vars]
+project_name = "template-cpp-project"
+github_username = "geugenm"
+cpp_standard = "23"
+cmake_version = "3.25.0+"
+platforms = ["Linux", "Windows", "macOS"]
+license = "AGPL-3.0"
+
 ## Status & Quality
 
-[![C++23](https://img.shields.io/badge/C%2B%2B-23-blue?style=for-the-badge&logo=c%2B%2B)](https://en.cppreference.com/w/cpp/compiler_support)
-[![CMake](https://img.shields.io/badge/CMake-3.25.0+-brightgreen?style=for-the-badge&logo=cmake)](https://cmake.org)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/yourusername/project/build.yml?style=for-the-badge)](https://github.com/yourusername/project/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/yourusername/project?style=for-the-badge&logo=codecov)](https://codecov.io/gh/yourusername/project)
+[![C++{cpp_standard}](https://img.shields.io/badge/C%2B%2B-{cpp_standard}-blue?style=for-the-badge&logo=c%2B%2B)](https://en.cppreference.com/w/cpp/compiler_support)
+[![CMake](https://img.shields.io/badge/CMake-{cmake_version}-brightgreen?style=for-the-badge&logo=cmake)](https://cmake.org)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/{github_username}/{project_name}/build.yml?style=for-the-badge)](https://github.com/{github_username}/{project_name}/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/{github_username}/{project_name}?style=for-the-badge&logo=codecov)](https://codecov.io/gh/{github_username}/{project_name})
 
 ## Ecosystem & Platform
 
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)](https://www.docker.com)
-[![Platform](https://img.shields.io/badge/Platforms-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey?style=for-the-badge)](https://github.com/yourusername/project)
-[![License](https://img.shields.io/badge/License-AGPL--3.0-red?style=for-the-badge)](https://www.gnu.org/licenses/agpl-3.0.en.html)
+[![Platform](https://img.shields.io/badge/Platforms-{' %7C '.join(platforms)}-lightgrey?style=for-the-badge)](https://github.com/{github_username}/{project_name})
+[![License](https://img.shields.io/badge/License-{license}-red?style=for-the-badge)](<https://www.gnu.org/licenses/{license.lower()}.en.html>)
 
 ## Community
 
-[![Contributors](https://img.shields.io/github/contributors/yourusername/project?style=for-the-badge)](https://github.com/yourusername/project/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/yourusername/project?style=for-the-badge)](https://github.com/yourusername/project/network/members)
-[![Stars](https://img.shields.io/github/stars/yourusername/project?style=for-the-badge)](https://github.com/yourusername/project/stargazers)
+[![Contributors](https://img.shields.io/github/contributors/{github_username}/{project_name}?style=for-the-badge)](https://github.com/{github_username}/{project_name}/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/{github_username}/{project_name}?style=for-the-badge)](https://github.com/{github_username}/{project_name}/network/members)
+[![Stars](https://img.shields.io/github/stars/{github_username}/{project_name}?style=for-the-badge)](https://github.com/{github_username}/{project_name}/stargazers)
 
 </div>
+
 ## 🌟 Features
 
 - **🔬 C++23 Ready Presets**: Leverage cutting-edge C++ features
