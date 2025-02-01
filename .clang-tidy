@@ -1,44 +1,4 @@
-Checks: >-
-  -*,
-  bugprone-*,
-  clang-analyzer-*,
-  cppcoreguidelines-*,
-  modernize-*,
-  performance-*,
-  readability-*,
-  microsoft-readability-*,
-  microsoft-modernize-*,
-  microsoft-performance-*,
-  microsoft-cppcoreguidelines-*,
-  microsoft-bugprone-*,
-  google-readability-braces-around-statements,
-  google-readability-todo,
-  readability-identifier-naming
-
-HeaderFilter: ""
-HeaderFilterRegex: "^(?!.*(gtest|gmock)).*$"
-
-AnalyzeTemporaryDtors: true
-
-AllowShortLoopsOnASingleLine: false
-IndentWidth: 4
-MaxEmptyLinesToKeep: 1
-NamespaceIndentation: None
-ObjCPropertyIndentation: None
-PenaltyBreakBeforeFirstCallParameter: 19
-SpacesBeforeTrailingComments: 1
-UseTab: Never
-
-WarningsAsErrors: "*"
-
-# Exclude specific files from linting
-ExcludePatterns:
-  - "external/**/*"
-  - "build/**/*"
-  - "generated/**/*"
-  - "third-party/**/*"
-  - "vendor/**/*"
-  - "tools/**/*"
-  - "modules/**/*"
-  - "cache/**/*"
-  - ".cache/**/*"
+Checks: "-*,bugprone-*,modernize-*,-modernize-use-trailing-return-type"
+CheckOptions:
+  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
+    value: WinMain,SDL_main

@@ -1,10 +1,20 @@
 find_program(CPPLINT "cpplint")
 
 if(CPPLINT)
+    file(
+        GLOB_RECURSE
+        ALL_SOURCE_FILES
+        CONFIGURE_DEPENDS
+        ${PROJECT_SOURCE_DIR}/src/*.[ch]pp
+        ${PROJECT_SOURCE_DIR}/src/*.[ch]
+        ${PROJECT_SOURCE_DIR}/src/*.[ch]xx
+        ${PROJECT_SOURCE_DIR}/ctest/*.[h]pp
+        ${PROJECT_SOURCE_DIR}/ctest/*.[h]
+        ${PROJECT_SOURCE_DIR}/ctest/*.[h]xx)
+
     add_custom_target(
         cpplint
-        COMMAND
-            ${CPPLINT} --recursive ${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,hpp,hxx}
+        COMMAND ${CPPLINT} --recursive ${ALL_SOURCE_FILES}
         COMMENT
             "Cpplint is a command-line tool to check C/C++ files for style issues according to Google's C++ style guide."
         )
