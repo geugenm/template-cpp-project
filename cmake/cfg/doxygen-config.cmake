@@ -1,27 +1,50 @@
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
-    set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/src)
-    set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/docs/doxygen)
-    file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR})
+    # Core Doxygen configuration
+    set(DOXYGEN_PROJECT_NAME "${PROJECT_NAME}")
+    set(DOXYGEN_PROJECT_NUMBER "${PROJECT_VERSION}")
+    set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/generated-docs")
+    set(DOXYGEN_CREATE_SUBDIRS YES)
+    set(DOXYGEN_FULL_PATH_NAMES NO)
 
-    set(DOXYGEN_CONFIG ${CMAKE_CURRENT_BINARY_DIR}/doxyfile)
+    # Modern C++ features
+    set(DOXYGEN_CLANG_ASSISTED_PARSING YES)
+    set(DOXYGEN_CLANG_OPTIONS "-std=c++23;-stdlib=libc++")
+    set(DOXYGEN_CPP_CLI_SUPPORT YES)
+    set(DOXYGEN_MARKDOWN_SUPPORT YES)
 
-    configure_file(${PROJECT_SOURCE_DIR}/doxyfile.in ${DOXYGEN_CONFIG} @ONLY)
+    # Output formats
+    set(DOXYGEN_GENERATE_HTML YES)
+    set(DOXYGEN_HTML_OUTPUT html)
+    set(DOXYGEN_GENERATE_MAN YES)
+    set(DOXYGEN_MAN_OUTPUT man)
 
-    add_custom_target(
-        doxygen
-        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_CONFIG}
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMENT "Generating documentation with Doxygen"
-        VERBATIM)
+    # Content configuration
+    set(DOXYGEN_EXCLUDE_PATTERNS "*/build/*" "*/third_party/*" "*/tests/*")
+
+    set(DOXYGEN_RECURSIVE YES)
+    set(DOXYGEN_EXTRACT_ALL YES)
+    set(DOXYGEN_EXTRACT_PRIVATE YES)
+
+    # Modern documentation features
+    set(DOXYGEN_HTML_COLORSTYLE "dark")
+    set(DOXYGEN_INTERACTIVE_SVG YES)
+    set(DOXYGEN_MATHJAX_FORMAT TeX)
+    set(DOXYGEN_USE_MATHJAX YES)
+
+    doxygen_add_docs(doxygen ${PROJECT_SOURCE_DIR} ALL
+                     COMMENT "Building API documentation")
+
 else()
     message(
-        WARNING
-            "Doxygen not found. The documentation target will not be available.\n"
-            "To install Doxygen, use one of the following commands:\n"
-            "For DNF: sudo dnf install doxygen\n"
-            "For Homebrew (macOS): brew install doxygen\n"
-            "For apt (Ubuntu): sudo apt install doxygen\n"
-            "Please ensure that Doxygen is in your PATH.")
+        WARNING "Doxygen not found - documentation targets disabled\n"
+                "Installation commands:\n"
+                "\n"
+                "  Fedora:    sudo dnf install doxygen graphviz\n"
+                "  Ubuntu:    sudo apt install doxygen doxygen-latex\n"
+                "  macOS:     brew install doxygen\n"
+                "  Windows:   choco install doxygen.install\n"
+                "\n"
+                "Regenerate project after installation")
 endif()

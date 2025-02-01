@@ -1,6 +1,4 @@
-#include <chrono>
 #include <print>
-#include <thread>
 
 namespace color
 {
@@ -11,6 +9,22 @@ static constexpr auto gold  = "\033[38;5;220m";
 static constexpr auto green = "\033[38;5;46m";
 } // namespace color
 
+/// @brief Main entry point of the program
+/// @return EXIT_SUCCESS on successful execution, EXIT_FAILURE on error
+/// @details Demonstrates the usage of std::print with ANSI color formatting
+/// @exception std::exception Catches and handles any standard library
+/// exceptions
+///
+/// Example output:
+/// @code
+/// ⬤ C++ 2023.23.0 ISO/IEC P2693R5 (gcc-13.2.1)
+///
+/// ⬤ Hello, World!
+/// @endcode
+///
+/// @note Requires C++23 compiler support for std::print
+/// @warning Terminal must support ANSI escape sequences for color output
+/// @see https://en.cppreference.com/w/cpp/io/print
 int main()
 {
     try
@@ -29,18 +43,6 @@ int main()
                    spec,
                    color::green,
                    __VERSION__);
-
-        using namespace std::chrono_literals;
-
-        for (int i = 0; i <= 30; ++i)
-        {
-            std::print("\r{}[{}>{}] {:%Y-%m-%d %H:%M:%S}",
-                       color::cyan,
-                       std::string(i, '='),
-                       std::string(30 - i, ' '),
-                       std::chrono::system_clock::now());
-            std::this_thread::sleep_for(50ms);
-        }
 
         std::print("\n{}⬤ {}Hello, {}World!{}\n",
                    color::green,

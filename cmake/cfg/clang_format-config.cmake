@@ -10,12 +10,14 @@ if(CLANG_FORMAT)
         )
 else()
     message(
-        WARNING
-            "clang-format not found. The format target will not be available.\n"
-            "To install clang-format, use one of the following commands:\n"
-            "For DNF: sudo dnf install clang-tools-extra\n"
-            "For Homebrew (macOS): brew install llvm\n"
-            "For Chocolatey (Windows): choco install llvm\n"
-            "For apt (Ubuntu): sudo apt install clang-format\n"
-            "Please ensure that clang-format is in your PATH.")
+        WARNING "clang-format not found - format target disabled\n"
+                "Installation commands:\n"
+                "\n"
+                "  Fedora:    sudo dnf install clang-tools-extra\n"
+                "  macOS:     brew install llvm\n"
+                "  Windows:   choco install llvm\n"
+                "  Ubuntu:    sudo apt install clang-format\n"
+                "\n"
+                "Regenerate project after installation\n"
+                "Note: Ensure clang-format is in your PATH")
 endif()

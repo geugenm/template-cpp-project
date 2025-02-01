@@ -11,11 +11,14 @@ if(CLANG_TIDY)
         )
 else()
     message(
-        WARNING "clang-tidy not found. The tidy target will not be available.\n"
-                "To install clang-tidy, use one of the following commands:\n"
-                "For DNF: sudo dnf install clang-tools-extra\n"
-                "For Homebrew (macOS): brew install llvm\n"
-                "For Chocolatey (Windows): choco install llvm\n"
-                "For apt (Ubuntu): sudo apt install clang-tidy\n"
-                "Please ensure that clang-tidy is in your PATH.")
+        WARNING "clang-tidy not found - tidy target disabled\n"
+                "Installation commands:\n"
+                "\n"
+                "  Fedora:    sudo dnf install clang-tools-extra\n"
+                "  macOS:     brew install llvm\n"
+                "  Windows:   choco install llvm\n"
+                "  Ubuntu:    sudo apt install clang-tidy\n"
+                "\n"
+                "Regenerate project after installation\n"
+                "Note: Ensure clang-tidy is in your PATH")
 endif()

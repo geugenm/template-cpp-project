@@ -10,10 +10,12 @@ if(CPPLINT)
         )
 else()
     message(
-        WARNING "cpplint not found. The lint target will not be available.\n"
-                "To install cpplint, use one of the following commands:\n"
-                "For DNF: sudo dnf install cpplint\n"
-                "For Homebrew (macOS): brew install cpplint\n"
-                "For pip: pip install cpplint\n"
-                "Please ensure that cpplint is in your PATH.")
+        WARNING "cpplint not found - lint target disabled\n"
+                "Installation methods:\n"
+                "\n"
+                "  Fedora:    sudo dnf install cpplint\n"
+                "  macOS:     brew install cpplint\n"
+                "  Python:    pip install cpplint\n"
+                "\n"
+                "Note: Ensure cpplint is in your PATH after installation")
 endif()
