@@ -6,7 +6,7 @@ project(
     DESCRIPTION "My awesome C/C++ project!"
     LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_PREFIX_PATH cmake/cfg)
@@ -19,6 +19,8 @@ find_package(doxygen CONFIG REQUIRED)
 # Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
 include(cmake/CPM.cmake)
 list(APPEND CMAKE_PREFIX_PATH cmake/pkg)
+
+set(CPM_USE_LOCAL_PACKAGES ON)
 
 # Add packages here
 find_package(doctest CONFIG REQUIRED)
