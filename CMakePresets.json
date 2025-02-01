@@ -17,9 +17,7 @@
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "23",
         "CMAKE_C_STANDARD": "23",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-        "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       },
       "environment": {
         "EXAMPLE_ENVIRONMENT_VARIABLE": "just_example"
@@ -32,9 +30,7 @@
       "description": "Debug build with assertions, debug info, and additional debugging options.",
       "inherits": "default",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined",
-        "CMAKE_C_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined"
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
@@ -43,9 +39,7 @@
       "description": "Release build with aggressive optimizations and without assertions.",
       "inherits": "default",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CXX_FLAGS_RELEASE": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Ofast -DNDEBUG -march=native",
-        "CMAKE_C_FLAGS_RELEASE": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Ofast -DNDEBUG -march=native"
+        "CMAKE_BUILD_TYPE": "Release"
       }
     }
   ],

@@ -38,6 +38,8 @@ target_include_directories(imgui SYSTEM INTERFACE ${imgui_SOURCE_DIR})
 #   - Arch:      sudo pacman -S mesa glu
 #   - Ubuntu:    sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
 
+target_link_libraries(imgui INTERFACE freetype)
+
 target_sources(
     imgui INTERFACE ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
                     ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp)

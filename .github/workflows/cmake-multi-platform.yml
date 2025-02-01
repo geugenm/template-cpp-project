@@ -43,7 +43,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgl-dev libgles-dev
+          sudo apt-get install -y libgl-dev libgles-dev ninja
 
       - name: Configure CMake
         run: cmake --preset release -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} -DCMAKE_CXX_COMPILER=${{ matrix.cxx_compiler }}
