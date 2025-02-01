@@ -8,13 +8,11 @@ cpmaddpackage(
     VERSION
     2.10.0)
 
-if(freetype_ADDED)
-    add_library(Freetype::Freetype ALIAS freetype)
+set_target_properties(freetype PROPERTIES CMAKE_RC_FLAGS
+                                          "${CMAKE_RC_FLAGS} -c65001")
 
-    set(FREETYPE_FOUND
-        TRUE
-        FREETYPE_INCLUDE_DIRS
-        ""
-        FREETYPE_LIBRARIES
-        Freetype::Freetype)
-endif()
+add_library(Freetype::Freetype ALIAS freetype)
+
+set(FREETYPE_FOUND TRUE)
+set(FREETYPE_INCLUDE_DIRS "")
+set(FREETYPE_LIBRARIES Freetype::Freetype)
