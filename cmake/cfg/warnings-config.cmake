@@ -3,8 +3,6 @@ option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" OFF)
 
 add_library(warnings INTERFACE)
 
-target_compile_features(warnings INTERFACE c_std_23 cxx_std_23)
-
 target_compile_options(
     warnings
     INTERFACE "$<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:"-Wall
