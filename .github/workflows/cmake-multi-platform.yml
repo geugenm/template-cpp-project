@@ -35,13 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install LLVM (Windows)
-        if: matrix.os == 'windows-latest'
-        run: choco install llvm --version=17.0.6
-
       - name: Install Linux deps
         if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get install -y libglfw3-dev xvfb
+        run: sudo apt-get install -y libgl-dev libgles-dev libegl-dev
 
       - name: Configure CMake
         run: cmake --preset release -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} -DCMAKE_CXX_COMPILER=${{ matrix.cxx_compiler }}
