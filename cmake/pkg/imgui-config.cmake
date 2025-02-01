@@ -40,6 +40,11 @@ target_include_directories(imgui SYSTEM INTERFACE ${imgui_SOURCE_DIR})
 
 target_link_libraries(imgui INTERFACE freetype)
 
+add_library(imgui_sdl3_opengl3 STATIC)
+
 target_sources(
-    imgui INTERFACE ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
-                    ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp)
+    imgui_sdl3_opengl3
+    PRIVATE ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
+            ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp)
+
+target_link_libraries(imgui_sdl3_opengl3 PUBLIC imgui SDL3::SDL3)
