@@ -22,6 +22,9 @@ list(APPEND CMAKE_PREFIX_PATH cmake/pkg)
 
 # Add packages here
 find_package(doctest CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(sdl3 CONFIG REQUIRED)
+find_package(freetype CONFIG REQUIRED)
 
 add_subdirectory(src)
 

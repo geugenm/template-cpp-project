@@ -1,32 +1,38 @@
 {
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
   "version": 9,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 25,
+    "minor": 30,
     "patch": 0
   },
   "configurePresets": [
     {
       "name": "default",
       "displayName": "default",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "description": "Base preset containing common configurations.",
       "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "23",
         "CMAKE_C_STANDARD": "23",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
         "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function"
+      },
+      "environment": {
+        "EXAMPLE_ENVIRONMENT_VARIABLE": "just_example"
       }
     },
+
     {
       "name": "debug",
       "displayName": "debug",
       "description": "Debug build with assertions, debug info, and additional debugging options.",
       "inherits": "default",
-      "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CXX_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined",
         "CMAKE_C_FLAGS_DEBUG": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Og -g -fsanitize=address,undefined"
       }
@@ -36,7 +42,6 @@
       "displayName": "release",
       "description": "Release build with aggressive optimizations and without assertions.",
       "inherits": "default",
-      "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_CXX_FLAGS_RELEASE": "-Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function -Ofast -DNDEBUG -march=native",
@@ -70,12 +75,12 @@
   ],
   "packagePresets": [
     {
-      "name": "debug",
+      "name": "tgz-debug",
       "configurePreset": "debug",
       "generators": ["TGZ"]
     },
     {
-      "name": "release",
+      "name": "tgz-release",
       "configurePreset": "release",
       "generators": ["TGZ"]
     }
@@ -98,7 +103,7 @@
         },
         {
           "type": "package",
-          "name": "debug"
+          "name": "tgz-debug"
         }
       ]
     },
@@ -119,7 +124,7 @@
         },
         {
           "type": "package",
-          "name": "release"
+          "name": "tgz-release"
         }
       ]
     }
