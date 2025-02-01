@@ -37,11 +37,6 @@ target_include_directories(imgui SYSTEM INTERFACE ${imgui_SOURCE_DIR})
 #   - Fedora:    sudo dnf install mesa-libGL-devel mesa-libGLU-devel
 #   - Arch:      sudo pacman -S mesa glu
 #   - Ubuntu:    sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev
-find_package(OpenGL COMPONENTS OpenGL EGL REQUIRED)
-
-message(STATUS "Found OpenGL [${OpenGL_VERSION}]"
-               "OpenGL libraries: [${OPENGL_LIBRARIES}]"
-               "OpenGL includes: [${OPENGL_INCLUDE_DIR}]")
 
 target_sources(
     imgui INTERFACE ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
