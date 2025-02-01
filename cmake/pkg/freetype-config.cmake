@@ -10,6 +10,7 @@ cpmaddpackage(
 
 set_target_properties(freetype PROPERTIES CMAKE_RC_FLAGS
                                           "${CMAKE_RC_FLAGS} -c65001")
+target_compile_definitions(freetype PRIVATE _UNICODE)
 
 add_library(Freetype::Freetype ALIAS freetype)
 
