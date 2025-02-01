@@ -50,8 +50,7 @@ jobs:
       - name: Setup OpenGL (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         uses: openrndr/setup-opengl@v1.1
-        with:
-          mesa-version: "22.3.5"
+      - run: xvfb-run glxinfo
 
       - name: Set reusable strings
         # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
