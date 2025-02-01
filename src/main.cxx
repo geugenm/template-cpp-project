@@ -32,7 +32,7 @@ int main()
         static constexpr auto cpp_ver = 23;
         static constexpr auto spec    = "P2693R5";
 
-        std::print("{}⬤ {}C++{} {}.{}.{} {}ISO/IEC {} {}({})\n",
+        std::print("{}⬤ {}C++{} {}.{}.{} {}ISO/IEC {} {}\n",
                    color::red,
                    color::cyan,
                    color::reset,
@@ -41,8 +41,7 @@ int main()
                    0,
                    color::gold,
                    spec,
-                   color::green,
-                   __VERSION__);
+                   color::green);
 
         std::print("\n{}⬤ {}Hello, {}World!{}\n",
                    color::green,
