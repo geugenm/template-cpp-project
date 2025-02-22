@@ -23,7 +23,6 @@
         "EXAMPLE_ENVIRONMENT_VARIABLE": "just_example"
       }
     },
-
     {
       "name": "debug",
       "displayName": "debug",
@@ -57,26 +56,40 @@
     {
       "name": "debug",
       "configurePreset": "debug",
-      "output": { "outputOnFailure": true },
-      "execution": { "noTestsAction": "error", "stopOnFailure": true }
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
     },
     {
       "name": "release",
       "configurePreset": "release",
-      "output": { "outputOnFailure": true },
-      "execution": { "noTestsAction": "error", "stopOnFailure": true }
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
     }
   ],
   "packagePresets": [
     {
       "name": "tgz-debug",
       "configurePreset": "debug",
-      "generators": ["TGZ"]
+      "generators": [
+        "TGZ"
+      ]
     },
     {
       "name": "tgz-release",
       "configurePreset": "release",
-      "generators": ["TGZ"]
+      "generators": [
+        "TGZ"
+      ]
     }
   ],
   "workflowPresets": [
