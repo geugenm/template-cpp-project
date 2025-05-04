@@ -7,7 +7,7 @@
 #include <expected>
 #include <imgui.h>
 
-struct SDLData
+struct SDLData final
 {
     SDL_Window*   window;
     SDL_GLContext gl_ctx;
@@ -38,7 +38,7 @@ struct SDLData
 
     SDL_GL_MakeCurrent(window, gl_ctx);
     SDL_GL_SetSwapInterval(1);
-    return SDLData{ window, gl_ctx };
+    return SDLData{ .window = window, .gl_ctx = gl_ctx };
 }
 
 TEST_CASE("SDL initialization")
