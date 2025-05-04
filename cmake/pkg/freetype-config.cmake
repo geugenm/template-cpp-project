@@ -4,12 +4,14 @@ cpmaddpackage(
     GITHUB_REPOSITORY
     aseprite/freetype2
     GIT_TAG
-    VER-2-10-0
+    VER-2-13-3
     VERSION
-    2.10.0)
+    2.13.3)
 
 set_target_properties(freetype PROPERTIES CMAKE_RC_FLAGS
-                                          "${CMAKE_RC_FLAGS} -c65001")
+                                          "${CMAKE_RC_FLAGS} /c65001")
+target_compile_options(freetype PRIVATE CMAKE_RC_FLAGS
+                                        "${CMAKE_RC_FLAGS} /c65001")
 target_compile_definitions(freetype PRIVATE _UNICODE)
 
 add_library(Freetype::Freetype ALIAS freetype)
