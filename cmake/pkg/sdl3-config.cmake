@@ -4,7 +4,7 @@ cpmaddpackage(
     GITHUB_REPOSITORY
     libsdl-org/SDL
     GIT_TAG
-    535d80badefc83c5c527ec5748f2a20d6a9310fe
+    5ac37a8ffcf89da390404c1016833d56e2d67ae4
     OPTIONS
     "SDL_STATIC ON"
     "SDL_SHARED OFF"
