@@ -95,3 +95,5 @@ cache/
 
 # Preset build directories
 .build/
+
+__pycache__

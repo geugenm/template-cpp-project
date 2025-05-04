@@ -4,8 +4,9 @@
 #include <SDL3/SDL.h>
 #include <backends/imgui_impl_opengl3.h>
 #include <backends/imgui_impl_sdl3.h>
-#include <expected>
 #include <imgui.h>
+
+#include <stdexcept>
 
 struct SDLData final
 {
@@ -13,10 +14,10 @@ struct SDLData final
     SDL_GLContext gl_ctx;
 };
 
-[[nodiscard]] auto init_sdl() -> std::expected<SDLData, const char*>
+[[nodiscard]] auto init_sdl() -> SDLData
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD) != true)
-        return std::unexpected(SDL_GetError());
+        throw std::runtime_error(SDL_GetError());
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
@@ -27,13 +28,13 @@ struct SDLData final
     SDL_Window* window =
         SDL_CreateWindow("ImGui SDL3", 1280, 720, SDL_WINDOW_OPENGL);
     if (!window)
-        return std::unexpected(SDL_GetError());
+        throw std::runtime_error(SDL_GetError());
 
     const SDL_GLContext gl_ctx = SDL_GL_CreateContext(window);
     if (!gl_ctx)
     {
         SDL_DestroyWindow(window);
-        return std::unexpected(SDL_GetError());
+        throw std::runtime_error(SDL_GetError());
     }
 
     SDL_GL_MakeCurrent(window, gl_ctx);
@@ -44,35 +45,32 @@ struct SDLData final
 TEST_CASE("SDL initialization")
 {
     auto sdl_data = init_sdl();
-    REQUIRE(sdl_data.has_value());
 
     SUBCASE("Window creation")
     {
-        CHECK(sdl_data->window != nullptr);
+        CHECK(sdl_data.window != nullptr);
     }
 
     SUBCASE("OpenGL context")
     {
-        CHECK(sdl_data->gl_ctx != nullptr);
+        CHECK(sdl_data.gl_ctx != nullptr);
     }
 
-    // Cleanup
-    SDL_GL_DestroyContext(sdl_data->gl_ctx);
-    SDL_DestroyWindow(sdl_data->window);
+    SDL_GL_DestroyContext(sdl_data.gl_ctx);
+    SDL_DestroyWindow(sdl_data.window);
     SDL_Quit();
 }
 
 TEST_CASE("ImGui integration")
 {
     auto sdl_data = init_sdl();
-    REQUIRE(sdl_data.has_value());
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
     SUBCASE("Backend initialization")
     {
-        CHECK(ImGui_ImplSDL3_InitForOpenGL(sdl_data->window, sdl_data->gl_ctx));
+        CHECK(ImGui_ImplSDL3_InitForOpenGL(sdl_data.window, sdl_data.gl_ctx));
         CHECK(ImGui_ImplOpenGL3_Init("#version 330"));
 
         // Teardown
@@ -81,19 +79,18 @@ TEST_CASE("ImGui integration")
     }
 
     ImGui::DestroyContext();
-    SDL_GL_DestroyContext(sdl_data->gl_ctx);
-    SDL_DestroyWindow(sdl_data->window);
+    SDL_GL_DestroyContext(sdl_data.gl_ctx);
+    SDL_DestroyWindow(sdl_data.window);
     SDL_Quit();
 }
 
 TEST_CASE("Main loop execution")
 {
     const auto sdl_data = init_sdl();
-    REQUIRE(sdl_data.has_value());
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGui_ImplSDL3_InitForOpenGL(sdl_data->window, sdl_data->gl_ctx);
+    ImGui_ImplSDL3_InitForOpenGL(sdl_data.window, sdl_data.gl_ctx);
     ImGui_ImplOpenGL3_Init("#version 330");
 
     SUBCASE("Frame rendering")
@@ -125,7 +122,7 @@ TEST_CASE("Main loop execution")
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL3_Shutdown();
     ImGui::DestroyContext();
-    SDL_GL_DestroyContext(sdl_data->gl_ctx);
-    SDL_DestroyWindow(sdl_data->window);
+    SDL_GL_DestroyContext(sdl_data.gl_ctx);
+    SDL_DestroyWindow(sdl_data.window);
     SDL_Quit();
 }
