@@ -35,7 +35,6 @@ if(DOXYGEN_FOUND)
 
     doxygen_add_docs(doxygen ${PROJECT_SOURCE_DIR} ALL
                      COMMENT "Building API documentation")
-
 else()
     message(
         WARNING "Doxygen not found - documentation targets disabled\n"

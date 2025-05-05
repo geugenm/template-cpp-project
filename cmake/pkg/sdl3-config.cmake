@@ -22,4 +22,5 @@ cpmaddpackage(
     "SDL_ASSEMBLY OFF"
     "SDL_TEST OFF"
     "SDL_TESTS OFF"
-    "SDL_ROCKCHIP OFF")
+    "SDL_ROCKCHIP OFF"
+)

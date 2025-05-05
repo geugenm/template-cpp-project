@@ -4,7 +4,8 @@ project(
     cxx_project
     VERSION 1.0.0
     DESCRIPTION "My awesome C/C++ project!"
-    LANGUAGES C CXX)
+    LANGUAGES C CXX
+)
 
 list(APPEND CMAKE_PREFIX_PATH cmake/cfg)
 

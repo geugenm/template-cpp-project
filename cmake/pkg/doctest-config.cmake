@@ -6,4 +6,5 @@ cpmaddpackage(
     VERSION
     2.4.11
     OPTIONS
-    "DOCTEST_WITH_TESTS OFF")
+    "DOCTEST_WITH_TESTS OFF"
+)
