@@ -1,6 +1,7 @@
-def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY')
-def buildAsApplication = !buildAsLibrary
-if (buildAsApplication) {
+final boolean is_built_as_library = project.hasProperty('BUILD_AS_LIBRARY')
+final boolean is_built_as_application = !is_built_as_library
+
+if (is_built_as_application) {
     apply plugin: 'com.android.application'
 }
 else {
@@ -10,9 +11,11 @@ else {
 android {
     compileSdk 35
     ndkVersion '27.0.12077973'
+    namespace 'mil.eugene.gamedev'
+    buildToolsVersion '36.0.0'
 
     defaultConfig {
-        if (buildAsApplication) {
+        if (is_built_as_application) {
             applicationId "mil.eugene.gamedev"
         }
         minSdkVersion 24
@@ -21,7 +24,8 @@ android {
         versionName "1.0"
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_PLATFORM=android-21", "-DANDROID_STL=c++_shared"
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
             }
         }
     }
@@ -36,9 +40,11 @@ android {
         }
     }
     applicationVariants.configureEach { variant ->
-        tasks["merge${variant.name.capitalize()}Assets"]
-            .dependsOn("externalNativeBuild${variant.name.capitalize()}")
+        tasks.named("merge${variant.name.capitalize()}Assets") {
+            dependsOn("externalNativeBuild${variant.name.capitalize()}")
+        }
     }
+
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
         sourceSets.main {
             jniLibs.srcDir 'libs'
@@ -49,11 +55,9 @@ android {
                 path '../../CMakeLists.txt'
             }
         }
-       
     }
-    namespace 'mil.eugene.gamedev'
 
-    if (buildAsLibrary) {
+    if (is_built_as_library) {
         libraryVariants.all { variant ->
             variant.outputs.each { output ->
                 def outputFile = output.outputFile
@@ -75,7 +79,6 @@ android {
     lint {
         abortOnError false
     }
-    buildToolsVersion '36.0.0'
 }
 
 dependencies {
