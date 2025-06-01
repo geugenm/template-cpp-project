@@ -4,7 +4,10 @@ cpmaddpackage(
     GITHUB_REPOSITORY
     doctest/doctest
     VERSION
-    2.4.11
+    2.4.12
+    DOWNLOAD_ONLY TRUE
     OPTIONS
     "DOCTEST_WITH_TESTS OFF"
 )
+
+add_subdirectory(${doctest_SOURCE_DIR} ${doctest_BINARY_DIR} EXCLUDE_FROM_ALL)

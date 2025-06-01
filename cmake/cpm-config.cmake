@@ -28,7 +28,9 @@ include(${CPM_DOWNLOAD_LOCATION})
 
 set(CPM_USE_LOCAL_PACKAGES ON)
 
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_LIST_DIR}/cpm)
+
 find_package(doctest CONFIG REQUIRED)
-find_package(freetype CONFIG REQUIRED)
-find_package(imgui CONFIG REQUIRED)
-find_package(sdl3 CONFIG REQUIRED)
+# find_package(freetype CONFIG REQUIRED)
+# find_package(imgui CONFIG REQUIRED)
+# find_package(sdl3 CONFIG REQUIRED)

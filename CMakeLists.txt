@@ -7,7 +7,7 @@ project(
     LANGUAGES C CXX
 )
 
-list(APPEND CMAKE_PREFIX_PATH cmake cmake/pkg cmake/cpm cmake/cfg)
+list(APPEND CMAKE_PREFIX_PATH cmake cmake/pkg cmake/utils)
 
 find_package(warnings CONFIG REQUIRED)
 
