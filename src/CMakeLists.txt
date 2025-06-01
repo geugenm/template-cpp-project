@@ -30,3 +30,7 @@ install(
             WORLD_READ
             WORLD_EXECUTE
 )
+
+find_package(SDL3 REQUIRED CONFIG)
+add_library(native_lib SHARED sdl_main.cxx)
+target_link_libraries(native_lib PRIVATE SDL3::SDL3)
