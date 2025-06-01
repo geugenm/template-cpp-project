@@ -19,7 +19,7 @@ android {
             applicationId "mil.eugene.gamedev"
         }
         minSdkVersion 24
-        targetSdkVersion 34
+        targetSdk 35
         versionCode 1
         versionName "1.0"
         externalNativeBuild {
@@ -34,7 +34,7 @@ android {
             debuggable true
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
@@ -59,11 +59,9 @@ android {
 
     if (is_built_as_library) {
         libraryVariants.all { variant ->
-            variant.outputs.each { output ->
-                def outputFile = output.outputFile
-                if (outputFile != null && outputFile.name.endsWith(".aar")) {
-                    def fileName = "org.libsdl.app.aar"
-                    output.outputFile = new File(outputFile.parent, fileName)
+            variant.outputs.all { output ->
+                if (outputFile.name.endsWith(".aar")) {
+                    output.outputFile = new File(outputFile.parent, "org.libsdl.app.aar")
                 }
             }
         }
