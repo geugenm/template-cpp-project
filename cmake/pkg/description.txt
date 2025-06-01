@@ -1,0 +1,5 @@
+My template package description. 
+
+It can contain multiple lines.
+
+But we cannot include large md files.
