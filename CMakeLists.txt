@@ -19,7 +19,7 @@ find_package(doxygen CONFIG REQUIRED)
 find_package(package CONFIG REQUIRED)
 
 # Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
-include(cmake/CPM.cmake)
+find_package(cpm CONFIG REQUIRED)
 
 set(CPM_USE_LOCAL_PACKAGES ON)
 
