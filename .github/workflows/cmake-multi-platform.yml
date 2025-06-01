@@ -14,12 +14,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         build_type: [Release]
-        compiler: [clang, gcc]
+        compiler: [clang]
         include:
-          - os: ubuntu-latest
-            compiler: gcc
-            c_compiler: gcc
-            cxx_compiler: g++
           - os: ubuntu-latest
             compiler: clang
             c_compiler: clang
@@ -28,9 +24,6 @@ jobs:
             compiler: clang
             c_compiler: clang-cl
             cxx_compiler: clang-cl
-        exclude:
-          - os: windows-latest
-            compiler: gcc
 
     steps:
       - uses: actions/checkout@v4
@@ -51,16 +44,7 @@ jobs:
             libegl1-mesa-dev libdbus-1-dev libibus-1.0-dev libudev-dev fcitx-libs-dev
 
       - name: Configure CMake
-        run: cmake --preset release -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} -DCMAKE_CXX_COMPILER=${{ matrix.cxx_compiler }}
-
-      - name: Build
-        run: cmake --build --preset release
-
-      - name: Test
-        run: ctest --preset release
-
-      - name: Package Release
-        run: cpack --preset tgz-release
+        run: cmake --workflow --preset clang-full
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4

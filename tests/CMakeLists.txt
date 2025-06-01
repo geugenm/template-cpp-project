@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.28)
 
 add_executable(env_test env_test.cxx)
 set_target_properties(env_test PROPERTIES CXX_STANDARD 26)
