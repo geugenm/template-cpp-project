@@ -7,18 +7,19 @@ project(
     LANGUAGES C CXX
 )
 
-list(APPEND CMAKE_PREFIX_PATH cmake/cfg)
+list(APPEND CMAKE_PREFIX_PATH cmake cmake/pkg cmake/cpm cmake/cfg)
 
 find_package(warnings CONFIG REQUIRED)
 
 find_package(clang_format CONFIG REQUIRED)
 find_package(clang_tidy CONFIG REQUIRED)
+find_package(clang_doc CONFIG REQUIRED)
 find_package(cpplint CONFIG REQUIRED)
 find_package(doxygen CONFIG REQUIRED)
+find_package(package CONFIG REQUIRED)
 
 # Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
 include(cmake/CPM.cmake)
-list(APPEND CMAKE_PREFIX_PATH cmake/pkg)
 
 set(CPM_USE_LOCAL_PACKAGES ON)
 

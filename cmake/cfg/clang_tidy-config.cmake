@@ -1,19 +1,25 @@
-find_program(CLANG_TIDY "clang-tidy")
+find_program(
+    clang_tidy_exe
+    NAMES clang-tidy
+    DOC
+        "clang-tidy: clang-based C++ linter. Install: 'sudo dnf install clang-tools-extra', 'sudo apt install clang-tidy', 'brew install llvm', or 'choco install llvm'. Required for 'clang_tidy' target."
+)
 
-if(CLANG_TIDY)
-    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY})
+if(clang_tidy_exe)
+    add_custom_target(
+        clang_tidy
+        COMMAND
+            "${clang_tidy_exe}" "${PROJECT_SOURCE_DIR}/**/*.{cpp,cxx,hpp,hxx}"
+            -- -std=c++20
+        WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+        VERBATIM
+        COMMENT "running clang-tidy (static analysis and lint) on all sources"
+        USES_TERMINAL
+    )
 else()
     message(
-        WARNING
-        "clang-tidy not found - tidy target disabled\n"
-        "Installation commands:\n"
-        "\n"
-        "  Fedora:    sudo dnf install clang-tools-extra\n"
-        "  macOS:     brew install llvm\n"
-        "  Windows:   choco install llvm\n"
-        "  Ubuntu:    sudo apt install clang-tidy\n"
-        "\n"
-        "Regenerate project after installation\n"
-        "Note: Ensure clang-tidy is in your PATH"
+        NOTICE
+        "clang-tidy not found. 'clang_tidy' target will not be available.\n"
+        "install: sudo dnf install clang-tools-extra | sudo apt install clang-tidy | brew install llvm | choco install llvm"
     )
 endif()
