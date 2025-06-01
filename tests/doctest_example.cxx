@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-[[nodiscard]] constexpr int32_t factorial(const int32_t& n) noexcept
+[[nodiscard]] static constexpr int32_t factorial(const int32_t& n) noexcept
 {
     return n <= 1 ? 1 : n * factorial(n - 1);
 }
