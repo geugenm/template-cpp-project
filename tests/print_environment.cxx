@@ -7,6 +7,7 @@
 #include <thread>
 
 #ifdef _WIN32
+#include <stdlib.h>
 #include <windows.h>
 #else
 #include <sys/utsname.h>
@@ -15,8 +16,21 @@
 [[nodiscard]] static std::string get_env(
     const char* var_name, const std::string& default_value = "Unknown")
 {
+#ifdef _WIN32
+    char*   value;
+    size_t  len;
+    errno_t err = _dupenv_s(&value, &len, var_name);
+    if (err || !value)
+    {
+        return default_value;
+    }
+    std::string result(value);
+    free(value);
+    return result;
+#else
     const char* value = std::getenv(var_name);
     return value ? std::string(value) : default_value;
+#endif
 }
 
 [[nodiscard]] static std::string get_os_info()
