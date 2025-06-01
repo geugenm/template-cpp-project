@@ -8,7 +8,23 @@ project(
     LANGUAGES C CXX
 )
 
-list(APPEND CMAKE_PREFIX_PATH cmake cmake/pkg cmake/utils)
+list(
+    APPEND
+    CMAKE_PREFIX_PATH
+    ${CMAKE_CURRENT_LIST_DIR}/cmake
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/pkg
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/utils
+)
+
+list(
+    APPEND
+    CMAKE_FIND_ROOT_PATH
+    ${CMAKE_CURRENT_LIST_DIR}/cmake
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/pkg
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/utils
+)
+
+message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 
 find_package(warnings CONFIG REQUIRED)
 

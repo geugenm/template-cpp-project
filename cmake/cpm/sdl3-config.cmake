@@ -6,8 +6,8 @@ cpmaddpackage(
     GIT_TAG
     8d604353a53853fa56d1bdce0363535605ca868f
     OPTIONS
-    "SDL_STATIC ON"
-    "SDL_SHARED OFF"
+    "SDL_STATIC OFF"
+    "SDL_SHARED ON"
     "SDL_CCACHE ON"
     "SDL_VIDEO_X11 OFF"
     "SDL_WAYLAND ON"

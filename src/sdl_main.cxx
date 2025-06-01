@@ -1,35 +1,36 @@
 #include <SDL3/SDL.h>
-#include <SDL3/SDL_log.h>
 #include <SDL3/SDL_main.h>
 
-SDL_Window*   window   = nullptr;
-SDL_Renderer* renderer = nullptr;
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/*                                                       */
+/* Remove this source, and replace with your SDL sources */
+/*                                                       */
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-extern "C" void SDL_AppInit()
+int main(int argc, char* argv[])
 {
-    SDL_Init(SDL_INIT_VIDEO);
-
-    window   = SDL_CreateWindow("SDL3 Android", 800, 600, 0);
-    renderer = SDL_CreateRenderer(window, nullptr);
-
-    SDL_Log("SDL3 initialized successfully!");
-}
-
-extern "C" void SDL_AppIterate()
-{
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
+    (void)argc;
+    (void)argv;
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO))
     {
-        if (event.type == SDL_EVENT_QUIT)
-        {
-            SDL_Log("Quit event received");
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_Quit();
-        }
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "SDL_Init failed (%s)",
+                     SDL_GetError());
+        return 1;
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    if (!SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_INFORMATION,
+            "Hello World",
+            "!! Your SDL project successfully runs on Android !!",
+            NULL))
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "SDL_ShowSimpleMessageBox failed (%s)",
+                     SDL_GetError());
+        return 1;
+    }
+
+    SDL_Quit();
+    return 0;
 }
