@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=@PROJECT_NAME@
+GenericName=@PROJECT_NAME@
+Exec=main %F
+Icon=icon
+Terminal=false
+Categories=Utility;Printing;System;
+MimeType=application/pdf;image/pwg-raster;image/urf;
+Keywords=kyocera;printer;filter;cups;raster;gdi;linux;ppd;driver;
+StartupNotify=true
+Actions=About;Help;
+
+[Desktop Action Help]
+Name=Get Help
+Exec=xdg-open https://yourdocs.example.com/help
