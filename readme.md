@@ -24,7 +24,7 @@
 
 ## 🚧 Prerequisites
 
-- `cmake 3.25.0+`
+- `cmake 3.28.0+`
 - `C++ compiler with C++23 support`
 - `ninja`
 - `(optional) cmake/cfg/*.cmake tools`
@@ -72,32 +72,32 @@ sudo dnf install cmake gcc-c++ doxygen
 ### Build Project
 
 ```bash
-cmake --preset=release .
+cmake --preset=gcc .
 cd build/release
-cmake --build . --config release
+cmake --build . --config gcc
 ```
 
 ### Run Tests
 
 ```bash
-cd build/release
+cd build/gcc
 ctest --output-on-failure
 ```
 
 ### Docker Build
 
 ```bash
-docker build -t my-image -f docker/Dockerfile .
+docker build -t my-image -f docker/<desired_os>.Dockerfile .
 ```
 
 ## 📚 Documentation
 
 ```bash
-cd build/release
+cd build/gcc
 cmake --build . --target doxygen
 
 # Browse documentation
-cd build/release/docs/doxygen/html
+cd build/gcc/docs/doxygen/html
 python -m http.server 8080
 ```
 
