@@ -14,23 +14,16 @@ find_package(warnings CONFIG REQUIRED)
 find_package(clang_format CONFIG REQUIRED)
 find_package(clang_tidy CONFIG REQUIRED)
 find_package(clang_doc CONFIG REQUIRED)
+
 find_package(cpplint CONFIG REQUIRED)
 find_package(doxygen CONFIG REQUIRED)
 find_package(package CONFIG REQUIRED)
 
-# Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
 find_package(cpm CONFIG REQUIRED)
-
-set(CPM_USE_LOCAL_PACKAGES ON)
-
-find_package(doctest CONFIG REQUIRED)
-find_package(freetype CONFIG REQUIRED)
-find_package(imgui CONFIG REQUIRED)
-find_package(sdl3 CONFIG REQUIRED)
 
 add_subdirectory(src)
 
-option(BUILD_TESTS "Build tests" ON)
+option(BUILD_TESTS "Enable building of test suite" ON)
 if(BUILD_TESTS)
     include(CTest)
     add_subdirectory(tests)

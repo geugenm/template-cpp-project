@@ -1,3 +1,4 @@
+# Use cpm (cmake package manager) - https://github.com/cpm-cmake/CPM.cmake
 set(CPM_DOWNLOAD_VERSION 0.42.0)
 
 if(CPM_SOURCE_CACHE)
@@ -24,3 +25,10 @@ file(
 )
 
 include(${CPM_DOWNLOAD_LOCATION})
+
+set(CPM_USE_LOCAL_PACKAGES ON)
+
+find_package(doctest CONFIG REQUIRED)
+find_package(freetype CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(sdl3 CONFIG REQUIRED)

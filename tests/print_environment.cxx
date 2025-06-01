@@ -12,14 +12,14 @@
 #include <sys/utsname.h>
 #endif
 
-[[nodiscard]] std::string get_env(const char*        var_name,
-                                  const std::string& default_value = "Unknown")
+[[nodiscard]] static std::string get_env(
+    const char* var_name, const std::string& default_value = "Unknown")
 {
     const char* value = std::getenv(var_name);
     return value ? std::string(value) : default_value;
 }
 
-[[nodiscard]] std::string get_os_info()
+[[nodiscard]] static std::string get_os_info()
 {
 #ifdef _WIN32
     char os_name[128];
@@ -41,7 +41,7 @@
 }
 
 // Function to get the current timestamp in ISO 8601 format
-[[nodiscard]] std::string get_current_timestamp()
+[[nodiscard]] static std::string get_current_timestamp()
 {
     auto    now        = std::chrono::system_clock::now();
     auto    time_t_now = std::chrono::system_clock::to_time_t(now);
@@ -56,7 +56,7 @@
                        local_tm.tm_sec);
 }
 
-void log_info(const std::string& key, const std::string& value)
+static void log_info(const std::string& key, const std::string& value)
 {
     std::cout << std::format(
         "{} [system] {}: {}\n", get_current_timestamp(), key, value);
