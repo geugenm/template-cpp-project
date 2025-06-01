@@ -51,6 +51,6 @@ jobs:
         with:
           name: ${{ matrix.os }}-${{ matrix.compiler }}-package
           path: |
-            build/gcc/*.tar.gz
-            build/gcc/*.rpm
-            build/gcc/*.zip
+            build/clang/*.tar.gz
+            build/clang/*.rpm
+            build/clang/*.zip
