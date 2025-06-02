@@ -1,27 +1,38 @@
-final boolean is_built_as_library = project.hasProperty('BUILD_AS_LIBRARY')
-final boolean is_built_as_application = !is_built_as_library
+final boolean isLibrary = project.hasProperty('BUILD_AS_LIBRARY')
+final boolean excludeNativeLibs = project.hasProperty('EXCLUDE_NATIVE_LIBS')
 
-if (is_built_as_application) {
-    apply plugin: 'com.android.application'
+if (isLibrary) {
+    apply plugin: 'com.android.library'
 }
 else {
-    apply plugin: 'com.android.library'
+    apply plugin: 'com.android.application'
 }
 
 android {
-    compileSdk 35
-    ndkVersion '27.0.12077973'
-    namespace 'mil.eugene.gamedev'
-    buildToolsVersion '36.0.0'
+    compileSdk libs.versions.compile.sdk.get().toInteger()
+    ndkVersion libs.versions.ndk.get()
+    namespace libs.versions.app.namespace.get()
+    buildToolsVersion libs.versions.build.tools.get()
+
+    compileOptions {
+        sourceCompatibility JavaVersion.toVersion(libs.versions.jvm.target.get())
+        targetCompatibility JavaVersion.toVersion(libs.versions.jvm.target.get())
+    }
 
     defaultConfig {
-        if (is_built_as_application) {
-            applicationId "mil.eugene.gamedev"
+        if (!isLibrary) {
+            applicationId libs.versions.app.namespace.get()
         }
-        minSdkVersion 24
-        targetSdk 35
-        versionCode 1
-        versionName "1.0"
+
+        minSdk libs.versions.min.sdk.get().toInteger()
+        targetSdk libs.versions.target.sdk.get().toInteger()
+        versionCode libs.versions.version.code.get().toInteger()
+        versionName libs.versions.version.name.get()
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_PLATFORM=android-21", "-DANDROID_STL=c++_shared"
@@ -29,56 +40,73 @@ android {
             }
         }
     }
+
+    buildFeatures {
+        prefab true      // Modern native dependency management
+    }
+
     buildTypes {
         debug {
             debuggable true
+            jniDebuggable true // C++ debugging support
         }
         release {
             minifyEnabled true
+            shrinkResources !isLibrary
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
-        }
-    }
-    applicationVariants.configureEach { variant ->
-        tasks.named("merge${variant.name.capitalize()}Assets") {
-            dependsOn("externalNativeBuild${variant.name.capitalize()}")
-        }
-    }
 
-    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
-        sourceSets.main {
-            jniLibs.srcDir 'libs'
-        }
-        externalNativeBuild {
-            cmake {
-                version("4.0.2")
-                path '../../CMakeLists.txt'
+            signingConfig signingConfigs.debug
+
+            // Performance-first: aggressive optimization
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE' // Balanced symbols for crashes
             }
         }
     }
 
-    if (is_built_as_library) {
-        libraryVariants.all { variant ->
-            variant.outputs.all { output ->
-                if (outputFile.name.endsWith(".aar")) {
-                    output.outputFile = new File(outputFile.parent, "org.libsdl.app.aar")
+    if (!excludeNativeLibs) {
+        externalNativeBuild {
+            cmake {
+                path file('../../CMakeLists.txt')
+                version libs.versions.cmake.get()
+            }
+        }
+    }
+
+    // Clean asset management
+    sourceSets {
+        main {
+            assets.srcDirs = ['../../assets']
+            if (!excludeNativeLibs) {
+                jniLibs.srcDirs = ['libs']
+            }
+        }
+    }
+
+    // Library-specific configuration
+    if (isLibrary) {
+        libraryVariants.configureEach { variant ->
+            variant.outputs.configureEach {
+                if (outputFileName.endsWith('.aar')) {
+                    outputFileName = "${project.name}-${variant.name}.aar"
                 }
             }
         }
     }
 
-    sourceSets {
-        main {
-            assets {
-                srcDirs = ['../../assets']
-            }
+    // Modern packaging options
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false // Modern packaging for better performance
         }
     }
+
     lint {
         abortOnError false
+        checkReleaseBuilds false // Skip lint for native-heavy projects
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
