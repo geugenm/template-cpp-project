@@ -10,4 +10,9 @@ cpmaddpackage(
     "DOCTEST_WITH_TESTS OFF"
 )
 
-add_subdirectory(${doctest_SOURCE_DIR} ${doctest_BINARY_DIR} EXCLUDE_FROM_ALL)
+add_subdirectory(
+    ${doctest_SOURCE_DIR}
+    ${doctest_BINARY_DIR}
+    SYSTEM
+    EXCLUDE_FROM_ALL
+)
