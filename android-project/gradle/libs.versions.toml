@@ -9,7 +9,7 @@ ndk = "27.0.12077973"
 build-tools = "36.0.0"
 
 # Java/JVM toolchain - unified across all modules
-java = "21"                    # Modern LTS version for 2025+
+java = "21"                   # Modern LTS version for 2025+
 jvm-target = "17"             # Android-compatible bytecode target
 
 # SDK versions

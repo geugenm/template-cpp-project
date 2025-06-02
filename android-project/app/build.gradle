@@ -9,10 +9,10 @@ else {
 }
 
 android {
-    compileSdk libs.versions.compile.sdk.get().toInteger()
-    ndkVersion libs.versions.ndk.get()
-    namespace libs.versions.app.namespace.get()
-    buildToolsVersion libs.versions.build.tools.get()
+    compileSdk = libs.versions.compile.sdk.get().toInteger()
+    ndkVersion = libs.versions.ndk.get()
+    namespace = libs.versions.app.namespace.get()
+    buildToolsVersion = libs.versions.build.tools.get()
 
     compileOptions {
         sourceCompatibility JavaVersion.toVersion(libs.versions.jvm.target.get())
@@ -21,13 +21,13 @@ android {
 
     defaultConfig {
         if (!isLibrary) {
-            applicationId libs.versions.app.namespace.get()
+            applicationId = libs.versions.app.namespace.get()
         }
 
-        minSdk libs.versions.min.sdk.get().toInteger()
-        targetSdk libs.versions.target.sdk.get().toInteger()
-        versionCode libs.versions.version.code.get().toInteger()
-        versionName libs.versions.version.name.get()
+        minSdk = libs.versions.min.sdk.get().toInteger()
+        targetSdk = libs.versions.target.sdk.get().toInteger()
+        versionCode = libs.versions.version.code.get().toInteger()
+        versionName = libs.versions.version.name.get()
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
@@ -42,24 +42,23 @@ android {
     }
 
     buildFeatures {
-        prefab true      // Modern native dependency management
+        prefab = true
     }
 
     buildTypes {
         debug {
-            debuggable true
-            jniDebuggable true // C++ debugging support
+            debuggable = true
+            jniDebuggable = true
         }
         release {
-            minifyEnabled true
-            shrinkResources !isLibrary
+            minifyEnabled = true
+            shrinkResources = !isLibrary
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            signingConfig signingConfigs.debug
+            signingConfig = signingConfigs.debug
 
-            // Performance-first: aggressive optimization
             ndk {
-                debugSymbolLevel 'SYMBOL_TABLE' // Balanced symbols for crashes
+                debugSymbolLevel = 'SYMBOL_TABLE'
             }
         }
     }
@@ -67,13 +66,12 @@ android {
     if (!excludeNativeLibs) {
         externalNativeBuild {
             cmake {
-                path file('../../CMakeLists.txt')
-                version libs.versions.cmake.get()
+                path = file('../../CMakeLists.txt')
+                version = libs.versions.cmake.get()
             }
         }
     }
 
-    // Clean asset management
     sourceSets {
         main {
             assets.srcDirs = ['../../assets']
@@ -83,7 +81,6 @@ android {
         }
     }
 
-    // Library-specific configuration
     if (isLibrary) {
         libraryVariants.configureEach { variant ->
             variant.outputs.configureEach {
@@ -94,16 +91,15 @@ android {
         }
     }
 
-    // Modern packaging options
     packagingOptions {
         jniLibs {
-            useLegacyPackaging = false // Modern packaging for better performance
+            useLegacyPackaging = false
         }
     }
 
     lint {
-        abortOnError false
-        checkReleaseBuilds false // Skip lint for native-heavy projects
+        abortOnError = false
+        checkReleaseBuilds = false
     }
 }
 
